@@ -6,15 +6,15 @@ title: Portfolio
 <h1 align="center">Hello.</h1>
 My name is Saagar Jha, and I am currently a senior at Monta Vista High School in Cupertino, California. From an early age, I've had a passion for working with computers. Here's a sample of what I've created.
 
-<blockquote style="font-size: smaller; background-color: #F4F4F4; padding: 0.5rem;">
+<blockquote style="font-size: smaller; background-color: #F7F7F7; padding: 0.5rem;">
 	<p style="font-size: smaller; letter-spacing: 0.1rem; margin: 0.25rem;">NOTE:</p>
 	<ol>
 		<li>Much of this code is freely available, either on my <a href="https://github.com/saagarjha">Github</a> or <a href="https://bitbucket.org/saagarjha/">Bitbucket</a> accounts. While the code posted here is the same as what's online, on occasion I have added comments to make it more clear what is going on. Comments marked as <code>// [SNIPPED]</code> indicate that some code has been omitted from the file to keep it at a reasonable size.
 		</li>
-		<li>I created this portfolio using Github Gist (and subsequently moved to my website since it was too large to display)–you can find it <a href="http://saagarjha.com/about/portfolio/">here</a>. I chose writing this in a Gist because has the advantage of:
+		<li>I created this portfolio using Markdown–you can find it <a href="http://saagarjha.com/about/portfolio/">here</a>. I chose writing this in Markdown because has the advantage of:
 			<ul>
 				<li>providing niceties such as code coloring and animated GIF support.</li>
-				<li>being up-to-date. I crashed my bike recently, breaking my computer (and my clavicle, which, unlike my computer, is fixable). Unfortunately, this forces me to write this on a borrowed laptop, without access to some of my code. I'll update this as soon as I can get a new computer with what I missed.</li>
+				<li>being up-to-date. <strike>I crashed my bike recently, breaking my computer (and my clavicle, which, unlike my computer, is fixable). Unfortunately, this forces me to write this on a borrowed laptop, without access to some of my code. I'll update this as soon as I can get a new computer with what I missed.</strike> I have a new computer now! I'm updating it as I recover my old files.</li>
 			</ul>
 		</li>
 	</ol>
@@ -323,7 +323,7 @@ func didConnect() {
 }
 
 func newService() {
-    services = peripheral.services!
+    services = peripheral.services ?? []
     dispatch_async(dispatch_get_main_queue() {
     	self.tableView.reloadData()
     }
@@ -354,7 +354,9 @@ Some of the Bluetooth accessory discovery code, which relies on `CoreBluetooth`.
 ## Open AdBlock
 This was the first open source project that I had written myself (as well as my first project with both Swift and Objective-C in it). While I had contributed code to other open source projects (such as [GBA4iOS](https://bitbucket.org/rileytestut/gba4ios) to get it [to compile on iOS 9 as well as fix some crashes](https://bitbucket.org/rileytestut/gba4ios/pull-requests/14/fixed-build-errors-and-some-crashes-some/diff)), this was the first project that I had written the code for start to finish. Open AdBlock initially leveraged a new feature in iOS 9, called content blocking, to block ads in Safari. However, when Apple dropped support for content blocking on 32-bit devices, I rewrote it from scratch to add support for 32-bit back. This required disassembling the SafariServices framework, which provided content blocking, and adding the features that Apple took out. **Open AdBlock is currently the first and only ad blocker in the world for both 32-bit and 64-bit iOS devices, without a jailbreak** (other ad blockers only support iPhone 5s and newer). The source code for Open AdBlock is available on [Github](https://github.com/saagarjha/OpenAdBlock). Here's the core of how it works:
 
-```objectivec
+{% raw %}
+
+```objc
 // [SNIPPED]
 @interface OABGestaltFixer : NSObject
 + (void)fixGestalt; // Method to trick Apple into thinking the device is 64 bit
@@ -382,7 +384,7 @@ This was the first open source project that I had written myself (as well as my 
 // [SNIPPED]
 ```
 
-```objectivec
+```objc
 // [SNIPPED]
 #import <dlfcn.h>
 #import "fishhook.h"
@@ -397,18 +399,18 @@ static BOOL OABGetBoolAnswer(NSString *question) { // Our "hacked" method
 	return [question isEqual:@"s+gaKNe68Gs3PfqKrZhi1w"] ? YES : OGGetBoolAnswer(question);
 }
 
-{% raw %}
 + (void)fixGestalt {
 	// Get the original method
 	OGGetBoolAnswer = dlsym(dlopen("/usr/lib/libMobileGestalt.dylib", RTLD_LAZY), "MGGetBoolAnswer");
 	// Swap our "hacked" method with the real one using fishhook
 	rebind_symbols((struct rebinding[1]) {{"MGGetBoolAnswer", OABGetBoolAnswer}}, 1);
 }
-{% endraw %}
 
 @end
 // [SNIPPED]
 ```
+
+{% endraw %}
 
 The above two Objective-C files trick iOS into allowing content blockers by spoofing that the device is 64-bit, allowing for the actual loading of Open AdBlock in the Swift file below:
 
