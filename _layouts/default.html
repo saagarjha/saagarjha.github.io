@@ -3,12 +3,14 @@
 	<head>
 		{% include head.html %}
 		<link rel="stylesheet" href="/css/default.css">
+		{% comment %}
 		{% for ss in page.stylesheets %}
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 		{% for rss in page.relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
+		{% endcomment %}
 		{% for rss in page.post_relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
