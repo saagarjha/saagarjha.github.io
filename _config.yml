@@ -1,0 +1,28 @@
+title: Saagar Jha
+email: saagar@saagarjha.com
+description: >
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+url: "http://saagarjha.com"
+github_username:  saagarjha
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+permalink: /blog/:year/:month/:day/:title/
+collections:
+  showcase:
+  projects:
+    output: true
+    permalink: /projects/:path/
+  toys:
+    output: true
+    permalink: /toys/:path/
+gems:
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
+exclude:
+  - Gemfile
+  - Gemfile.lock

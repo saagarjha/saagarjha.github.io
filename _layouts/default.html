@@ -1,0 +1,24 @@
+</!DOCTYPE html>
+<html>
+	<head>
+		{% include head.html %}
+		<link rel="stylesheet" href="/css/default.css">
+		{% for ss in page.stylesheets %}
+		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		{% endfor %}
+		{% for rss in page.relative_stylesheets %}
+		<link rel="stylesheet" href="{{ rss }}.css">
+		{% endfor %}
+		{% for rss in page.post_relative_stylesheets %}
+		<link rel="stylesheet" href="{{ rss }}.css">
+		{% endfor %}
+		{% for ss in page.post_stylesheets %}
+		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		{% endfor %}
+	</head>
+	<body>
+		{% include header.html %}
+		{{ content }}
+		{% include footer.html %}
+	</body>
+</html>

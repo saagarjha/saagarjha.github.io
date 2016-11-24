@@ -1,0 +1,34 @@
+---
+---
+
+@import "navbar";
+@import "syntax-highlight";
+
+$fonts: -apple-system, "Helvetica Neue", sans-serif;
+
+$font_size: 1rem;
+$line_height: 1.5;
+
+$link_color: #2E63BC;
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: $fonts;
+	margin: 0;
+	font-size: $font_size;
+	line-height: $line_height;
+}
+
+p {
+	font-size: $font-size;
+}
+
+a {
+	color: $link_color;
+	&:hover {
+		text-decoration: underline;
+	}
+}

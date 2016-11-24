@@ -1,0 +1,25 @@
+---
+---
+
+$dl_font_size: 1.5rem;
+$dl_line_height: 1.5;
+$dl_margin_size: 1rem 0 1rem 1rem;
+$dl_bottom_border: 1px solid #EEE;
+
+dl {
+	dt {
+		font-size: $dl_font_size;
+		line-height: $dl_line_height;
+		margin: $dl_margin_size;
+		border-bottom: $dl_bottom_border;
+	}
+	dd {
+		a {
+			display: inline-block;
+		}
+		p {
+			display: inline-block;
+			width: 1rem;
+		}
+	}
+}

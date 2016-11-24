@@ -1,0 +1,20 @@
+$showcase_item_height: 30rem;
+
+.showcase {
+	height: $showcase_item_height;
+	width: 100%;
+	overflow: hidden;
+	figure {
+		position: absolute;
+		margin: 0;
+		height: $showcase_item_height;
+		width: 100%;
+		background-color: #FFF;
+		overflow: hidden;	
+	}
+	&:hover {
+		figure {
+			animation-play-state: paused;
+		}
+	}
+}
