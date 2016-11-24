@@ -4,19 +4,19 @@
 		{% include head.html %}
 		<link rel="stylesheet" href="/css/default.css">
 
+		{% for rss in page.relative_stylesheets %}
+		<link rel="stylesheet" href="{{ rss }}.css">
+		{% endfor %}
+
+		{% for ss in page.stylesheets %}
+		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		{% endfor %}
+
 		{% for rss in layout.relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
 
 		{% for ss in layout.stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
-		{% endfor %}
-
-		{% for rss in post.relative_stylesheets %}
-		<link rel="stylesheet" href="{{ rss }}.css">
-		{% endfor %}
-
-		{% for ss in post.stylesheets %}
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 
@@ -28,11 +28,11 @@
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 
-		{% for rss in post.post_relative_stylesheets %}
+		{% for rss in page.post_relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
 
-		{% for ss in post.post_stylesheets %}
+		{% for ss in page.post_stylesheets %}
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 

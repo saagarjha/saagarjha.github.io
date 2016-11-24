@@ -1,8 +1,6 @@
 ---
 layout: page
 title: About
-relative_stylesheets:
-  - about
 ---
 
 # Hi, I'm Saagar Jha.
