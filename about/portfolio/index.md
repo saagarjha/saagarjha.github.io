@@ -397,12 +397,14 @@ static BOOL OABGetBoolAnswer(NSString *question) { // Our "hacked" method
 	return [question isEqual:@"s+gaKNe68Gs3PfqKrZhi1w"] ? YES : OGGetBoolAnswer(question);
 }
 
+{% raw %}
 + (void)fixGestalt {
 	// Get the original method
 	OGGetBoolAnswer = dlsym(dlopen("/usr/lib/libMobileGestalt.dylib", RTLD_LAZY), "MGGetBoolAnswer");
 	// Swap our "hacked" method with the real one using fishhook
 	rebind_symbols((struct rebinding[1]) {{"MGGetBoolAnswer", OABGetBoolAnswer}}, 1);
 }
+{% endraw %}
 
 @end
 // [SNIPPED]
