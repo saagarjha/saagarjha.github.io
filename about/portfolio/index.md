@@ -1219,5 +1219,5 @@ Overall, I have worked with many different technologies ranging from Assembly on
 Thank you for your time and consideration.
 
 <hr>
-<a name="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since this Gist is private, it should be safe.  
+<a name="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since I'm only posting snippets, it should be safe.  
 <a name="footnote1"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.
