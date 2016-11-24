@@ -11,7 +11,7 @@ My name is Saagar Jha, and I am currently a senior at Monta Vista High School in
 	<ol>
 		<li>Much of this code is freely available, either on my <a href="https://github.com/saagarjha">Github</a> or <a href="https://bitbucket.org/saagarjha/">Bitbucket</a> accounts. While the code posted here is the same as what's online, on occasion I have added comments to make it more clear what is going on. Comments marked as <code>// [SNIPPED]</code> indicate that some code has been omitted from the file to keep it at a reasonable size.
 		</li>
-		<li>I created this portfolio using Markdown–you can find it <a href="http://saagarjha.com/about/portfolio/">here</a>. I chose writing this in Markdown because has the advantage of:
+		<li>I created this portfolio using Markdown–you can find it <a href="{{ site.url }}/about/portfolio/">here</a>. I chose writing this in Markdown because has the advantage of:
 			<ul>
 				<li>providing niceties such as code coloring and animated GIF support.</li>
 				<li>being up-to-date. <strike>I crashed my bike recently, breaking my computer (and my clavicle, which, unlike my computer, is fixable). Unfortunately, this forces me to write this on a borrowed laptop, without access to some of my code. I'll update this as soon as I can get a new computer with what I missed.</strike> I have a new computer now! I'm updating it as I recover my old files.</li>
@@ -149,7 +149,7 @@ void draw() {
 		box(SIZE, SIZE, SIZE);
 		popMatrix();
 	}
-	// Move to the player
+	// Move the player
 	move();
 	// Make sure the camera points the right direction
 	camera(x, y, z, x + sin(ah), y + sin(av), z + cos(ah), 0, 1, 0);
@@ -212,7 +212,7 @@ The 3D drawing and moving code, mostly shared between MazeRunner and Flight Simu
 
 <img src="MazeRunner1.png" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">What the maze in MazeRunner looks like. This has been version has been hacked to allow for moving up to view the whole maze. This is also why the horizon seems "off"–that's actually the maximum draw distance.</p>
+<p align="center">What the maze in MazeRunner looks like. This has been version has been "hacked" to allow for moving up to view the whole maze. This is also why the horizon seems "off"–that's actually the maximum draw distance.</p>
 
 ```java
 // [SNIPPED]
@@ -668,7 +668,7 @@ struct ion {
 	char charge[CHARGE_SIZE];
 };
 
-int ion_comp(const void *ion1, const void* ion2) {
+int ion_comp(const void *ion1, const void *ion2) {
 	return strcasecmp(((struct ion*)ion1)->name, ((struct ion*)ion2)->name);
 }
 

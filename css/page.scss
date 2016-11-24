@@ -23,11 +23,11 @@ $h4_bottom_border: none;
 $h5_bottom_border: none;
 $h6_bottom_border: none;
 
+$pre_font: 0.8rem Menlo, monospace;
+$pre_tab_size: 4;
 $pre_background_color: #F7F7F7;
 $pre_padding: 0.75rem;
 $pre_border_radius: 0.25rem;
-
-$pre_font: 0.8rem Menlo, monospace;
 
 $blockquote_padding: 0 1rem;
 $blockquote_color: rgba(#000, .5);
@@ -66,6 +66,7 @@ a {
 
 pre {
 	font: $pre_font;
+	tab-size: $pre_tab_size;
 	background-color: $pre_background_color;
 	padding: $pre_padding;
 	border-radius: $pre_border_radius;
