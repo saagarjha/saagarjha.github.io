@@ -13,14 +13,16 @@ collections:
   showcase:
   projects:
     output: true
-    permalink: /projects/:path/
+    permalink: /projects/:title/
   toys:
     output: true
-    permalink: /toys/:path/
+    permalink: /toys/:title/
 gems:
   - jekyll-redirect-from
+  - jekyll-sitemap
 whitelist:
   - jekyll-redirect-from
+  - jekyll-sitemap
 exclude:
   - Gemfile
   - Gemfile.lock
