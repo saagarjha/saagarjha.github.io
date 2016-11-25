@@ -455,16 +455,16 @@ SFContentBlockerManager.shared()._loadContentBlocker(withIdentifier:
 ## Vulcanize
 I wrote Vulcanize in Swift to help me get send math and physics formulas through iMessage. Vulcanize allows users to type in LaTeX formulas have have them be converted to pretty-printed math formulas when they're sent. **Vulcanize is available on the [App Store](https://itunes.apple.com/bw/app/vulcanize/id1154777474?mt=8)**, however I haven't gotten around to posting the source code online yet (it needs a bit of cleaning up and commenting, and I never post code that I don't believe is well written).
 
-<img src="Vulcanize1.png" width="425"/> <img src="Vulcanize2.png" width="425"/>
-<img src="Vulcanize3.png" width="425"/> <img src="Vulcanize4.png" width="425"/>
+<img src="Vulcanize1.png"  width="50%" style="float: left;"/> <img src="Vulcanize2.png"  width="50%" style="float: right;"/>
+<img src="Vulcanize3.png"  width="50%" style="float: left;"/> <img src="Vulcanize4.png"  width="50%" style="float: right;"/>
 
 <p align="center">Screenshots of Vulcanize from its App Store page</p>
 
 ## Pool
 Pool is an app I wrote in 12 hours for CU Hacks. Since many people want to carpool, but aren't able to find anyone to carpool with, Pool aims to be a ridesharing app to help users find carpoolers. It takes into account start and end locations, and then matches users with those who have similar routes. Pool allows users to advertise their own rides as well, so that they can find carpoolers. While CU Hacks is a team competition (teams of up to 4 people), I worked on Pool solo and won second place.
 
-<img src="Pool1.png" width="425"/> <img src="Pool2.png" width="425"/>
-<img src="Pool3.png" width="425"/> <img src="Pool4.png" width="425"/>
+<img src="Pool1.png"  width="50%" style="float: left;"/> <img src="Pool2.png"  width="50%" style="float: right;"/>
+<img src="Pool3.png"  width="50%" style="float: left;"/> <img src="Pool4.png"  width="50%" style="float: right;"/>
 
 <p align="center">Screenshots of Pool from the Hackathon</p>
 
@@ -724,7 +724,7 @@ int main(int argc, char **argv) {
 }
 ```
 
-<img src="ions1.png" align="center" width="500" style="display: block; margin-left: auto; margin-right: auto"/>
+<img src="ions1.png" align="center" width="480" style="display: block; margin-left: auto; margin-right: auto"/>
 
 <p align="center">Screenshot of ions from my TI-89 (which is why the resolution is poor; the TI-89 is 160x100).</p>
 
@@ -1206,11 +1206,11 @@ extension CGRect {
 
 Of course, what I've included here a very small chunk of the full project. break still needs a bit of work (like more colors!), but it's nearing completion.
 
-<img src="break1.png" width="425"/> <img src="break2.png" width="425"/>
-<img src="break3.png" width="425"/> <img src="break4.png" width="425"/>
-<img src="break5.png" width="425"/> <img src="break6.png" width="425"/>
-<img src="break7.png" width="425"/> <img src="break8.png" width="425"/>
-<img src="break9.png" width="425" align="center" />
+<img src="break1.png" width="50%" style="float: left;"/> <img src="break2.png" width="50%" style="float: right;"/>
+<img src="break3.png" width="50%" style="float: left;"/> <img src="break4.png" width="50%" style="float: right;"/>
+<img src="break5.png" width="50%" style="float: left;"/> <img src="break6.png" width="50%" style="float: right;"/>
+<img src="break7.png" width="50%" style="float: left;"/> <img src="break8.png" width="50%" style="float: right;"/>
+<img src="break9.png" width="50%" align="center" />
 
 <p align="center">A couple of screenshots of break, showing off some of its capabilities</p>
 
