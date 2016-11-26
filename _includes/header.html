@@ -8,7 +8,7 @@
 	<ul>
 		{% assign links = "home,projects,toys,blog,about" | split: "," %}
 		{% for link in links %}
-		<li><a href="/{{ link }}" {% if link == current %}{% raw %}id="current-nav-item"{% endraw %}{% endif %}>{{ link | capitalize }}</a></li>
+		<li><a href="{{ site.url }}/{{ link }}" {% if link == current %}{% raw %}id="current-nav-item"{% endraw %}{% endif %}>{{ link | capitalize }}</a></li>
 		{% endfor %}
 	</ul>
 </nav>
