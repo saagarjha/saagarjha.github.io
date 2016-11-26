@@ -2,7 +2,8 @@ title: Saagar Jha
 email: saagar@saagarjha.com
 description: >
   Saagar Jha's website, projects he's worked on, blog, and cool facts about him.
-url: "http://saagarjha.com"
+url: "https://saagarjha.com"
+enforce_ssl: saagarjha.com
 github_username:  saagarjha
 markdown: kramdown
 kramdown:
