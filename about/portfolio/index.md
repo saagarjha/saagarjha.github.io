@@ -3,7 +3,7 @@ layout: page
 title: Portfolio
 ---
 
-<h1 align="center">Hello.</h1>
+<h1 style="text-align: center;">Hello.</h1>
 My name is Saagar Jha, and I am currently a senior at Monta Vista High School in Cupertino, California. From an early age, I've had a passion for working with computers. Here's a sample of what I've created.
 
 <blockquote style="font-size: smaller; background-color: #F7F7F7; padding: 0.5rem;">
@@ -11,10 +11,10 @@ My name is Saagar Jha, and I am currently a senior at Monta Vista High School in
 	<ol>
 		<li>Much of this code is freely available, either on my <a href="https://github.com/saagarjha">Github</a> or <a href="https://bitbucket.org/saagarjha/">Bitbucket</a> accounts. While the code posted here is the same as what's online, on occasion I have added comments to make it more clear what is going on. Comments marked as <code>// [SNIPPED]</code> indicate that some code has been omitted from the file to keep it at a reasonable size.
 		</li>
-		<li>I created this portfolio using Markdown–you can find it <a href="{{ site.url }}/about/portfolio/">here</a>. I chose writing this in Markdown because has the advantage of:
+		<li>I created this portfolio using Markdown on my website–you can find it <a href="{{ site.url }}/about/portfolio/">here</a>. I chose writing this in Markdown/HTML because has the advantage of:
 			<ul>
 				<li>providing niceties such as code coloring and animated GIF support.</li>
-				<li>being up-to-date. <strike>I crashed my bike recently, breaking my computer (and my clavicle, which, unlike my computer, is fixable). Unfortunately, this forces me to write this on a borrowed laptop, without access to some of my code. I'll update this as soon as I can get a new computer with what I missed.</strike> I have a new computer now! I'm updating it as I recover my old files.</li>
+				<li>being up-to-date. <del>I crashed my bike recently, breaking my computer (and my clavicle, which, unlike my computer, is fixable). Unfortunately, this forces me to write this on a borrowed laptop, without access to some of my code. I'll update this as soon as I can get a new computer with what I missed.</del> I have a new computer now! I'm updating it as I recover my old files.</li>
 			</ul>
 		</li>
 	</ol>
@@ -23,17 +23,17 @@ My name is Saagar Jha, and I am currently a senior at Monta Vista High School in
 ## Logical
 Logical is a Java application I wrote for my ninth grade Java class as a final project of writing an "educational game". Logical teaches users Boolean algebra and logic gates by challenging them to build circuits that satisfy a set of demands with as few gates as possible. Unfortunately, while I have not been able to make the code publicly available so as to not run afoul of my school's Academic Honesty policy<sup>[1](#footnote1)</sup>, here are some relevant snippets and screenshots from the program:
 
-<img src="Logical1.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical1.png" alt="Logical1" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">The title screen. The play button looks a bit off, since we were required to use a <code>Layout</code> for our <code>JPanel</code>s. The gate images are drawn in code–it's sibling class is used for circuit creation below.</p>
+<p style="text-align: center;">The title screen. The play button looks a bit off, since we were required to use a <code>Layout</code> for our <code>JPanel</code>s. The gate images are drawn in code–it's sibling class is used for circuit creation below.</p>
 
-<img src="Logical2.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical2.png" alt="Logical2" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">Creating a XOR circuit. The red signifies that the gate hasn't been properly hooked up.</p>
+<p style="text-align: center;">Creating a XOR circuit. The red signifies that the gate hasn't been properly hooked up.</p>
 
-<img src="Logical3.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical3.png" alt="Logical3" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">A completed circuit, ready for checking. This one is incorrectly done, which the user will find out in a moment, as the tests are performed.</p>
+<p style="text-align: center;">A completed circuit, ready for checking. This one is incorrectly done, which the user will find out in a moment, as the tests are performed.</p>
 
 ```java
 // [SNIPPED]
@@ -103,25 +103,25 @@ private class CircuitRunner extends SwingWorker<Void, SetData> {
 ```
 This code was the core of the animation for running the circuit. Since we weren't allowed to use the `Timer` class, I was forced to create a new `Thread` managed by `SwingWorker` to perform the checking of the circuit. Here's what it looks like in action:
 
-<img src="Logical4.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical4.png" alt="Logical4" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">Running the circuit checks. The testing is animated so that the user can see what failed–this one is almost done with the first test.</p>
+<p style="text-align: center;">Running the circuit checks. The testing is animated so that the user can see what failed–this one is almost done with the first test.</p>
 
-<img src="Logical5.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical5.png" alt="Logical5" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">Some checks failed–they're highlighted in red. The current check being performed is yellow.</p>
+<p style="text-align: center;">Some checks failed–they're highlighted in red. The current check being performed is yellow.</p>
 
-<img src="Logical6.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical6.png" alt="Logial6" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">The circuit failed to pass all the checks–the user needs to fix the circuit.</p>
+<p style="text-align: center;">The circuit failed to pass all the checks–the user needs to fix the circuit.</p>
 
-<img src="Logical7.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical7.png" alt="Logical7" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">All checks passed–the level is cleared.</p>
+<p style="text-align: center;">All checks passed–the level is cleared.</p>
 
-<img src="Logical0.gif" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="Logical0.gif" alt="Logical0" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">An animated version.</p>
+<p style="text-align: center;">An animated version.</p>
 
 
 ## MazeRunner/Flight Simulator
@@ -210,9 +210,9 @@ void move() {
 ```
 The 3D drawing and moving code, mostly shared between MazeRunner and Flight Simulator.
 
-<img src="MazeRunner1.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="MazeRunner1.png" alt="MazeRunner1" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">What the maze in MazeRunner looks like. This has been version has been "hacked" to allow for moving up to view the whole maze. This is also why the horizon seems "off"–that's actually the maximum draw distance.</p>
+<p style="text-align: center;">What the maze in MazeRunner looks like. This has been version has been "hacked" to allow for moving up to view the whole maze. This is also why the horizon seems "off"–that's actually the maximum draw distance.</p>
 
 ```java
 // [SNIPPED]
@@ -302,17 +302,17 @@ void draw() {
 ```
 This code generates the heightmap for Flight Simulator, and draws it, using a modified Diamond-Square algorithm.
 
-<img src="FlightSimulator1.png" style="display: block; margin-left: auto; margin-right: auto" />
-<img src="FlightSimulator2.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="FlightSimulator1.png" alt="FlightSimulator1" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="FlightSimulator2.png" alt="FlightSimulator2" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">The terrain generated with Flight Simulator, viewed from the aircraft.</p>
+<p style="text-align: center;">The terrain generated with Flight Simulator, viewed from the aircraft.</p>
 
 ## SmartHome
 I wrote this in the summer of 2015 for a research project on home automation. This was my first "major" app for iOS (in the sense that it was a complete, useful product) I had written in Swift. SmartHome allowed users to control pre-programmed Bluetooth enabled devices (which I along with a couple of my friends wrote the code for), such as lights, motion sensors, and other "smart" appliances. The code no longer compiles due to changes made in Swift 2 and 3, but I still have the app binary on my phone to control my bedroom lights.
 
-<img src="SmartHome1.jpg" style="display: block; margin-left: auto; margin-right: auto" >
+<img src="SmartHome1.jpg" alt="SmartHome1" style="display: block; margin-left: auto; margin-right: auto" >
 
-<p align="center">One of the PCBs used to control appliances; this one is from <a href="http://www.csr.com">CSR</a>. This one is currently being tested for a voltage drop to make sure that it was running the code that I had loaded on it (from the computer on the left, through the black USB cable). Off-camera, my phone is detecting <a href="https://en.wikipedia.org/wiki/Received_signal_strength_indication">RSSI</a> values to determine Bluetooth signal strength.</p>
+<p style="text-align: center;">One of the PCBs used to control appliances; this one is from <a href="http://www.csr.com">CSR</a>. This one is currently being tested for a voltage drop to make sure that it was running the code that I had loaded on it (from the computer on the left, through the black USB cable). Off-camera, my phone is detecting <a href="https://en.wikipedia.org/wiki/Received_signal_strength_indication">RSSI</a> values to determine Bluetooth signal strength.</p>
 
 ```swift
 // [SNIPPED]
@@ -347,9 +347,9 @@ func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic charac
 
 Some of the Bluetooth accessory discovery code, which relies on `CoreBluetooth`. Unfortunately, this will fail to compile currently due to the "Swiftication" of the Grand Central Dispatch APIs in Swift 3.
 
-<img src="SmartHome2.png" style="display: block; margin-left: auto; margin-right: auto" />
+<img src="SmartHome2.png" alt="SmartHome2" style="display: block; margin-left: auto; margin-right: auto" />
 
-<p align="center">Promotional art I made from SmartHome screenshots.</p>
+<p style="text-align: center;">Promotional art I made from SmartHome screenshots.</p>
 
 ## Open AdBlock
 This was the first open source project that I had written myself (as well as my first project with both Swift and Objective-C in it). While I had contributed code to other open source projects (such as [GBA4iOS](https://bitbucket.org/rileytestut/gba4ios) to get it [to compile on iOS 9 as well as fix some crashes](https://bitbucket.org/rileytestut/gba4ios/pull-requests/14/fixed-build-errors-and-some-crashes-some/diff)), this was the first project that I had written the code for start to finish. Open AdBlock initially leveraged a new feature in iOS 9, called content blocking, to block ads in Safari. However, when Apple dropped support for content blocking on 32-bit devices, I rewrote it from scratch to add support for 32-bit back. This required disassembling the SafariServices framework, which provided content blocking, and adding the features that Apple took out. **Open AdBlock is currently the first and only ad blocker in the world for both 32-bit and 64-bit iOS devices, without a jailbreak** (other ad blockers only support iPhone 5s and newer). The source code for Open AdBlock is available on [Github](https://github.com/saagarjha/OpenAdBlock). Here's the core of how it works:
@@ -448,25 +448,25 @@ SFContentBlockerManager.shared()._loadContentBlocker(withIdentifier:
 // [SNIPPED]
 ```
 
-<img src="OpenAdBlock1.png" style="display: block; margin-left: auto; margin-right: auto" >
+<img src="OpenAdBlock1.png" alt="OpenAdBlock1" style="display: block; margin-left: auto; margin-right: auto" >
 
-<p align="center">The `SafariServices` framework, disassembled. Notice the string <code>"s+gaKNe68Gs3PfqKrZhi1w"</code> and the reference to <code>MGGetBoolAnswer</code>–they're the core of Apple's checks, and must be circumvented in my app.</p>
+<p style="text-align: center;">The `SafariServices` framework, disassembled. Notice the string <code>"s+gaKNe68Gs3PfqKrZhi1w"</code> and the reference to <code>MGGetBoolAnswer</code>–they're the core of Apple's checks, and must be circumvented in my app.</p>
 
 ## Vulcanize
 I wrote Vulcanize in Swift to help me get send math and physics formulas through iMessage. Vulcanize allows users to type in LaTeX formulas have have them be converted to pretty-printed math formulas when they're sent. **Vulcanize is available on the [App Store](https://itunes.apple.com/bw/app/vulcanize/id1154777474?mt=8)**, however I haven't gotten around to posting the source code online yet (it needs a bit of cleaning up and commenting, and I never post code that I don't believe is well written).
 
-<img src="Vulcanize1.png"  width="50%" style="float: left;"/> <img src="Vulcanize2.png"  width="50%" style="float: right;"/>
-<img src="Vulcanize3.png"  width="50%" style="float: left;"/> <img src="Vulcanize4.png"  width="50%" style="float: right;"/>
+<img src="Vulcanize1.png" alt="Vulcanize1" style="float: left; width: 50%;"/> <img src="Vulcanize2.png" alt="Vulcanize2" style="float: right; width: 50%;"/>
+<img src="Vulcanize3.png" alt="Vulcanize3" style="float: left; width: 50%;"/> <img src="Vulcanize4.png" alt="Vulcanize4" style="float: right; width: 50%;"/>
 
-<p align="center">Screenshots of Vulcanize from its App Store page</p>
+<p style="text-align: center;">Screenshots of Vulcanize from its App Store page</p>
 
 ## Pool
 Pool is an app I wrote in 12 hours for CU Hacks. Since many people want to carpool, but aren't able to find anyone to carpool with, Pool aims to be a ridesharing app to help users find carpoolers. It takes into account start and end locations, and then matches users with those who have similar routes. Pool allows users to advertise their own rides as well, so that they can find carpoolers. While CU Hacks is a team competition (teams of up to 4 people), I worked on Pool solo and won second place.
 
-<img src="Pool1.png"  width="50%" style="float: left;"/> <img src="Pool2.png"  width="50%" style="float: right;"/>
-<img src="Pool3.png"  width="50%" style="float: left;"/> <img src="Pool4.png"  width="50%" style="float: right;"/>
+<img src="Pool1.png" alt="Pool1" style="float: left; width: 50%;"/> <img src="Pool2.png" alt="Pool2" style="float: right; width: 50%;"/>
+<img src="Pool3.png" alt="Pool3" style="float: left; width: 50%;"/> <img src="Pool4.png" alt="Pool4" style="float: right; width: 50%;"/>
 
-<p align="center">Screenshots of Pool from the Hackathon</p>
+<p style="text-align: center;">Screenshots of Pool from the Hackathon</p>
 
 ## ions
 ions is a program that I wrote to help me and some fellow students get through my AP Chemistry class. It's written in C for calculators with the Motorola 68000 processor (i.e. TI-89, TI-92, and Voyage 200) for the purpose of making it easy to look up common ions and their properties. The source code as well as prebuilt files are available on [Github](https://github.com/saagarjha/ions).
@@ -724,9 +724,9 @@ int main(int argc, char **argv) {
 }
 ```
 
-<img src="ions1.png" align="center" width="480" style="display: block; margin-left: auto; margin-right: auto"/>
+<img src="ions1.png" alt="ions1" style="text-align: center;" width="480" style="display: block; margin-left: auto; margin-right: auto"/>
 
-<p align="center">Screenshot of ions from my TI-89 (which is why the resolution is poor; the TI-89 is 160x100).</p>
+<p style="text-align: center;">Screenshot of ions from my TI-89 (which is why the resolution is poor; the TI-89 is 160x100).</p>
 
 ## break
 I consider break to be *the* best software I have ever written. Originally a drop-in replacement for the SchoolLoop app for iOS that my school uses for grade management and viewing, it has grown into much more. I have spent almost a year on it, and while it is still being tested by a couple dozen testers in different schools around California using Apple's [TestFlight](https://developer.apple.com/testflight/) service, I am nearing completion and eventual submission to the App Store. Written in more than 5000 lines of pure Swift, it is a "is a lightweight, native app for accessing SchoolLoop. It aims to provide an easier to use, more feature rich alternative to the official SchoolLoop iOS and Android apps."<sup>[2](#footnote2)</sup> Aiming to fix the frustrations I encountered in the official apps, I reverse-engineered SchoolLoop's grade API endpoints by intercepting the packets the app sent out, which I used in break. break also includes dozens of features that the official app does not include, such as the ability to mark assignments as complete, access a the file locker from a mobile device, preview files, among others. Finally, it deeply leverages existing Apple technologies such as 3D Touch, watchOS APIs, Grand Central Dispatch, QuickLook, Notifications, and TouchID, to make it seamless, well written, and efficient. break's source code is available on [Github](https://github.com/saagarjha/break). Here's the core of the program (quite a bit is removed, since the file is 700+ lines long):
@@ -1206,13 +1206,13 @@ extension CGRect {
 
 Of course, what I've included here a very small chunk of the full project. break still needs a bit of work (like more colors!), but it's nearing completion.
 
-<img src="break1.png" width="50%" style="float: left;"/> <img src="break2.png" width="50%" style="float: right;"/>
-<img src="break3.png" width="50%" style="float: left;"/> <img src="break4.png" width="50%" style="float: right;"/>
-<img src="break5.png" width="50%" style="float: left;"/> <img src="break6.png" width="50%" style="float: right;"/>
-<img src="break7.png" width="50%" style="float: left;"/> <img src="break8.png" width="50%" style="float: right;"/>
-<img src="break9.png" width="50%" align="center" />
+<img src="break1.png" alt="break1" style="float: left; width: 50%;"/> <img src="break2.png" alt="break2" style="float: right; width: 50%;"/>
+<img src="break3.png" alt="break3" style="float: left; width: 50%;"/> <img src="break4.png" alt="break4" style="float: right; width: 50%;"/>
+<img src="break5.png" alt="break4" style="float: left; width: 50%;"/> <img src="break6.png" alt="break6" style="float: right; width: 50%;"/>
+<img src="break7.png" alt="break7" style="float: left; width: 50%;"/> <img src="break8.png" alt="break8" style="float: right; width: 50%;"/>
+<img src="break9.png" alt="break9" style="width: 50%; display: block; margin: 0 auto;" />
 
-<p align="center">A couple of screenshots of break, showing off some of its capabilities</p>
+<p style="text-align: center;">A couple of screenshots of break, showing off some of its capabilities</p>
 
 <hr>
 
@@ -1221,5 +1221,5 @@ Overall, I have worked with many different technologies ranging from Assembly on
 Thank you for your time and consideration.
 
 <hr>
-<a name="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since I'm only posting snippets, it should be safe.  
-<a name="footnote1"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.
+<a id="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since I'm only posting snippets, it should be safe.  
+<a id="footnote2"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.
