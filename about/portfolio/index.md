@@ -1228,7 +1228,7 @@ Of course, what I've included here a very small chunk of the full project. break
 	<img src="break3.png" alt="break3" id="left-image"/> <img src="break4.png" alt="break4" id="right-image"/>
 	<img src="break5.png" alt="break4" id="left-image"/> <img src="break6.png" alt="break6" id="right-image"/>
 	<img src="break7.png" alt="break7" id="left-image"/> <img src="break8.png" alt="break8" id="right-image"/>
-	<img src="break9.png" alt="break9" id="center-image" style="width: 50%;"/>
+	<img src="break9.png" alt="break9" id="center-image" style="width: 50%; padding: 1rem;"/>
 	<figcaption>A couple of screenshots of break, showing off some of its capabilities</figcaption>
 </figure>
 
