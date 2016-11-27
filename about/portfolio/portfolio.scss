@@ -1,0 +1,43 @@
+---
+---
+
+$direction_img_padding: 1rem;
+$img_border_radius: 0.25rem;
+
+$note_font_size: smaller;
+$note_background_color: #F7F7F7;
+$note_padding: 0.5rem;
+
+$note_p_font_size: smaller;
+$note_p_letter_spacing: 0.1rem;
+$note_p_margin: 0.25rem;
+
+#center-text {
+	text-align: center;
+}
+
+#center-image {
+	display: block;
+	margin: 0 auto;
+}
+
+@each $direction in (left, right) {
+	##{$direction}-image {
+		float: $direction;
+		width: 50%;
+		padding: $direction_img_padding;
+		border-radius: $direction_img_padding + $img_border_radius;
+	}
+}
+
+.note {
+	font-size: $note_font_size;
+	background-color: $note_background_color;
+	padding: $note_padding;
+
+	p {
+		font-size: $note_p_font_size;
+		letter-spacing: $note_p_letter_spacing;
+		margin: $note_p_margin;
+	}
+}

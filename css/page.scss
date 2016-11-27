@@ -4,6 +4,7 @@
 $article_width: 55rem;
 $article_margin: 1.5rem auto;
 $article_padding: 1rem;
+$article_color: #333;
 
 $p_margin_size: 0.25rem;
 
@@ -24,21 +25,27 @@ $h4_bottom_border: none;
 $h5_bottom_border: none;
 $h6_bottom_border: none;
 
+$img_border_radius: 0.25rem;
+
 $pre_font: 0.8rem Menlo, monospace;
 $pre_tab_size: 4;
 $pre_background_color: #F7F7F7;
+$pre_margin: 1rem;
 $pre_padding: 0.75rem;
-$pre_border_radius: 0.25rem;
+$pre_border_radius: $img_border_radius;
 
 $blockquote_margin: 0.5rem 0 0.5rem 2rem;
-$blockquote_color: rgba(#000, .5);
-$blockquote_left_border: 0.25rem solid rgba(#000, 0.2);
+$blockquote_color: rgba($article_color, .5);
+$blockquote_left_border: 0.25rem solid rgba($article_color, 0.2);
+
+$figure_margin: 1rem;
 
 article {
 	max-width: $article_width;
 	display: block;
 	margin: $article_margin;
 	padding: $article_padding;
+	color: $article_color;
 }
 
 article * {
@@ -66,10 +73,15 @@ a {
 	text-decoration: none;
 }
 
+img {
+	border-radius: $img_border_radius;
+}
+
 pre {
 	font: $pre_font;
 	tab-size: $pre_tab_size;
 	background-color: $pre_background_color;
+	margin: $pre_margin;
 	padding: $pre_padding;
 	border-radius: $pre_border_radius;
 	code {
@@ -81,4 +93,12 @@ blockquote {
 	margin: $blockquote_margin;
 	color: $blockquote_color;
 	border-left: $blockquote_left_border;
+}
+
+figure {
+	margin: $figure_margin;
+}
+
+figcaption {
+	text-align: center;
 }
