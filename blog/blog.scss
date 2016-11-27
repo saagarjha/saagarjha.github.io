@@ -1,10 +1,25 @@
 ---
 ---
 
+$title_feed_font_size: 1rem;
+$title_feed_bottom: 0.25rem;
+$title_feed_right: 0;
+
 $dl_font_size: 1.5rem;
 $dl_line_height: 1.5;
-$dl_margin_size: 1rem 0 1rem 2rem;
+$dl_margin_size: 1rem 0.25rem 1rem 2rem;
 $dl_bottom_border: 1px solid #EEE;
+
+#title {
+	position: relative;
+	
+	a {
+		position: absolute;
+		right: $title_feed_right;
+		bottom: $title_feed_bottom;
+		font-size: $title_feed_font_size;
+	}
+}
 
 dl {
 	dt {

@@ -741,7 +741,7 @@ int main(int argc, char **argv) {
 ```
 
 <figure>
-	<img src="ions1.png" alt="ions1" style="text-align: center;" width="480" class="center-image"/>
+	<img src="ions1.png" alt="ions1" width="480" class="center-image"/>
 	<figcaption>Screenshot of ions from my TI-89 (which is why the resolution is poor; the TI-89 is 160x100).</figcaption>
 </figure>
 

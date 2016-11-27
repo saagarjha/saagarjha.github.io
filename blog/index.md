@@ -4,7 +4,7 @@ title: Blog
 relative_stylesheets:
   - blog
 ---
-# Post Archives
+<h1 id="title">Post Archives <a href="{{ site.baseurl }}/feed.xml">Atom Feed</a></h1>
 
 <dl>
 {% for post in site.posts %}
