@@ -12,17 +12,23 @@ $note_p_font_size: smaller;
 $note_p_letter_spacing: 0.1rem;
 $note_p_margin: 0.25rem;
 
-#center-text {
+.center-text {
 	text-align: center;
 }
 
-#center-image {
+.center-image {
 	display: block;
 	margin: 0 auto;
 }
 
+.half {
+	width: 50%;
+	padding: $direction_img_padding;
+	border-radius: $direction_img_padding + $img_border_radius;
+}
+
 @each $direction in (left, right) {
-	##{$direction}-image {
+	.#{$direction}-image {
 		float: $direction;
 		width: 50%;
 		padding: $direction_img_padding;

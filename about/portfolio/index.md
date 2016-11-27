@@ -5,7 +5,7 @@ relative_stylesheets:
   - portfolio
 ---
 
-<h1 id="center-text">Hello.</h1>
+<h1 class="center-text">Hello.</h1>
 My name is Saagar Jha, and I am currently a senior at Monta Vista High School in Cupertino, California. From an early age, I've had a passion for working with computers. Here's a sample of what I've created.
 
 <blockquote class="note">
@@ -26,17 +26,17 @@ My name is Saagar Jha, and I am currently a senior at Monta Vista High School in
 Logical is a Java application I wrote for my ninth grade Java class as a final project of writing an "educational game". Logical teaches users Boolean algebra and logic gates by challenging them to build circuits that satisfy a set of demands with as few gates as possible. Unfortunately, while I have not been able to make the code publicly available so as to not run afoul of my school's Academic Honesty policy<sup>[1](#footnote1)</sup>, here are some relevant snippets and screenshots from the program:
 
 <figure>
-	<img src="Logical1.png" alt="Logical1" id="center-image" />
+	<img src="Logical1.png" alt="Logical1" class="center-image" />
 	<figcaption>The title screen. The play button looks a bit off, since we were required to use a <code>Layout</code> for our <code>JPanel</code>s. The gate images are drawn in code–it's sibling class is used for circuit creation below.</figcaption>
 </figure>
 
 <figure>
-	<img src="Logical2.png" alt="Logical2" id="center-image" />
+	<img src="Logical2.png" alt="Logical2" class="center-image" />
 	<figcaption>Creating a XOR circuit. The red signifies that the gate hasn't been properly hooked up.</figcaption>
 </figure>
 
 <figure>
-	<img src="Logical3.png" alt="Logical3" id="center-image" />
+	<img src="Logical3.png" alt="Logical3" class="center-image" />
 	<figcaption>A completed circuit, ready for checking. This one is incorrectly done, which the user will find out in a moment, as the tests are performed.</figcaption>
 </figure>
 
@@ -109,27 +109,27 @@ private class CircuitRunner extends SwingWorker<Void, SetData> {
 This code was the core of the animation for running the circuit. Since we weren't allowed to use the `Timer` class, I was forced to create a new `Thread` managed by `SwingWorker` to perform the checking of the circuit. Here's what it looks like in action:
 
 <figure>
-	<img src="Logical4.png" alt="Logical4" id="center-image" />
+	<img src="Logical4.png" alt="Logical4" class="center-image" />
 	<figcaption>Running the circuit checks. The testing is animated so that the user can see what failed–this one is almost done with the first test.</figcaption>
 </figure>
 
 <figure>
-	<img src="Logical5.png" alt="Logical5" id="center-image" />
+	<img src="Logical5.png" alt="Logical5" class="center-image" />
 	<figcaption>Some checks failed–they're highlighted in red. The current check being performed is yellow.</figcaption>
 </figure>
 
 <figure>
-	<img src="Logical6.png" alt="Logial6" id="center-image" />
+	<img src="Logical6.png" alt="Logial6" class="center-image" />
 	<figcaption>The circuit failed to pass all the checks–the user needs to fix the circuit.</figcaption>
 </figure>
 
 <figure>
-	<img src="Logical7.png" alt="Logical7" id="center-image" />
+	<img src="Logical7.png" alt="Logical7" class="center-image" />
 	<figcaption>All checks passed–the level is cleared.</figcaption>
 </figure>
 
 <figure>
-	<img src="Logical0.gif" alt="Logical0" id="center-image" />
+	<img src="Logical0.gif" alt="Logical0" class="center-image" />
 	<figcaption>An animated version.</figcaption>
 </figure>
 
@@ -220,7 +220,7 @@ void move() {
 The 3D drawing and moving code, mostly shared between MazeRunner and Flight Simulator.
 
 <figure>
-	<img src="MazeRunner1.png" alt="MazeRunner1" id="center-image" />
+	<img src="MazeRunner1.png" alt="MazeRunner1" class="center-image" />
 	<figcaption>What the maze in MazeRunner looks like. This has been version has been "hacked" to allow for moving up to view the whole maze. This is also why the horizon seems "off"–that's actually the maximum draw distance.</figcaption>
 </figure>
 
@@ -313,8 +313,8 @@ void draw() {
 This code generates the heightmap for Flight Simulator, and draws it, using a modified Diamond-Square algorithm.
 
 <figure>
-	<img src="FlightSimulator1.png" alt="FlightSimulator1" id="center-image" />
-	<img src="FlightSimulator2.png" alt="FlightSimulator2" id="center-image" />
+	<img src="FlightSimulator1.png" alt="FlightSimulator1" class="center-image" />
+	<img src="FlightSimulator2.png" alt="FlightSimulator2" class="center-image" />
 	<figcaption>The terrain generated with Flight Simulator, viewed from the aircraft.</figcaption>
 </figure>
 
@@ -322,7 +322,7 @@ This code generates the heightmap for Flight Simulator, and draws it, using a mo
 I wrote this in the summer of 2015 for a research project on home automation. This was my first "major" app for iOS (in the sense that it was a complete, useful product) I had written in Swift. SmartHome allowed users to control pre-programmed Bluetooth enabled devices (which I along with a couple of my friends wrote the code for), such as lights, motion sensors, and other "smart" appliances. The code no longer compiles due to changes made in Swift 2 and 3, but I still have the app binary on my phone to control my bedroom lights.
 
 <figure>
-	<img src="SmartHome1.jpg" alt="SmartHome1" id="center-image" />
+	<img src="SmartHome1.jpg" alt="SmartHome1" class="center-image" />
 	<figcaption>One of the PCBs used to control appliances; this one is from <a href="http://www.csr.com">CSR</a>. This one is currently being tested for a voltage drop to make sure that it was running the code that I had loaded on it (from the computer on the left, through the black USB cable). Off-camera, my phone is detecting <a href="https://en.wikipedia.org/wiki/Received_signal_strength_indication">RSSI</a> values to determine Bluetooth signal strength.</figcaption>
 </figure>
 
@@ -360,7 +360,7 @@ func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic charac
 Some of the Bluetooth accessory discovery code, which relies on `CoreBluetooth`. Unfortunately, this will fail to compile currently due to the "Swiftication" of the Grand Central Dispatch APIs in Swift 3.
 
 <figure>
-	<img src="SmartHome2.png" alt="SmartHome2" id="center-image" />
+	<img src="SmartHome2.png" alt="SmartHome2" class="center-image" />
 	<figcaption>Promotional art I made from SmartHome screenshots.</figcaption>
 </figure>
 
@@ -462,7 +462,7 @@ SFContentBlockerManager.shared()._loadContentBlocker(withIdentifier:
 ```
 
 <figure>
-	<img src="OpenAdBlock1.png" alt="OpenAdBlock1" id="center-image" >
+	<img src="OpenAdBlock1.png" alt="OpenAdBlock1" class="center-image" >
 	<figcaption>The `SafariServices` framework, disassembled. Notice the string <code>"s+gaKNe68Gs3PfqKrZhi1w"</code> and the reference to <code>MGGetBoolAnswer</code>–they're the core of Apple's checks, and must be circumvented in my app.</figcaption>
 </figure>
 
@@ -470,8 +470,8 @@ SFContentBlockerManager.shared()._loadContentBlocker(withIdentifier:
 I wrote Vulcanize in Swift to help me get send math and physics formulas through iMessage. Vulcanize allows users to type in LaTeX formulas have have them be converted to pretty-printed math formulas when they're sent. **Vulcanize is available on the [App Store](https://itunes.apple.com/bw/app/vulcanize/id1154777474?mt=8)**, however I haven't gotten around to posting the source code online yet (it needs a bit of cleaning up and commenting, and I never post code that I don't believe is well written).
 
 <figure>
-	<img src="Vulcanize1.png" alt="Vulcanize1" id="left-image"/> <img src="Vulcanize2.png" alt="Vulcanize2" id="right-image"/>
-	<img src="Vulcanize3.png" alt="Vulcanize3" id="left-image"/> <img src="Vulcanize4.png" alt="Vulcanize4" id="right-image"/>
+	<img src="Vulcanize1.png" alt="Vulcanize1" class="left-image"/> <img src="Vulcanize2.png" alt="Vulcanize2" class="right-image"/>
+	<img src="Vulcanize3.png" alt="Vulcanize3" class="left-image"/> <img src="Vulcanize4.png" alt="Vulcanize4" class="right-image"/>
 	<figcaption>Screenshots of Vulcanize from its App Store page</figcaption>
 </figure>
 
@@ -479,8 +479,8 @@ I wrote Vulcanize in Swift to help me get send math and physics formulas through
 Pool is an app I wrote in 12 hours for CU Hacks. Since many people want to carpool, but aren't able to find anyone to carpool with, Pool aims to be a ridesharing app to help users find carpoolers. It takes into account start and end locations, and then matches users with those who have similar routes. Pool allows users to advertise their own rides as well, so that they can find carpoolers. While CU Hacks is a team competition (teams of up to 4 people), I worked on Pool solo and won second place.
 
 <figure>
-	<img src="Pool1.png" alt="Pool1" id="left-image"/> <img src="Pool2.png" alt="Pool2" id="right-image"/>
-	<img src="Pool3.png" alt="Pool3" id="left-image"/> <img src="Pool4.png" alt="Pool4" id="right-image"/>
+	<img src="Pool1.png" alt="Pool1" class="left-image"/> <img src="Pool2.png" alt="Pool2" class="right-image"/>
+	<img src="Pool3.png" alt="Pool3" class="left-image"/> <img src="Pool4.png" alt="Pool4" class="right-image"/>
 	<figcaption>Screenshots of Pool from the Hackathon</figcaption>
 </figure>
 
@@ -741,7 +741,7 @@ int main(int argc, char **argv) {
 ```
 
 <figure>
-	<img src="ions1.png" alt="ions1" style="text-align: center;" width="480" id="center-image"/>
+	<img src="ions1.png" alt="ions1" style="text-align: center;" width="480" class="center-image"/>
 	<figcaption>Screenshot of ions from my TI-89 (which is why the resolution is poor; the TI-89 is 160x100).</figcaption>
 </figure>
 
@@ -1224,11 +1224,11 @@ extension CGRect {
 Of course, what I've included here a very small chunk of the full project. break still needs a bit of work (like more colors!), but it's nearing completion.
 
 <figure>
-	<img src="break1.png" alt="break1" id="left-image"/> <img src="break2.png" alt="break2" id="right-image"/>
-	<img src="break3.png" alt="break3" id="left-image"/> <img src="break4.png" alt="break4" id="right-image"/>
-	<img src="break5.png" alt="break4" id="left-image"/> <img src="break6.png" alt="break6" id="right-image"/>
-	<img src="break7.png" alt="break7" id="left-image"/> <img src="break8.png" alt="break8" id="right-image"/>
-	<img src="break9.png" alt="break9" id="center-image" style="width: 50%; padding: 1rem;"/>
+	<img src="break1.png" alt="break1" class="left-image"/> <img src="break2.png" alt="break2" class="right-image"/>
+	<img src="break3.png" alt="break3" class="left-image"/> <img src="break4.png" alt="break4" class="right-image"/>
+	<img src="break5.png" alt="break4" class="left-image"/> <img src="break6.png" alt="break6" class="right-image"/>
+	<img src="break7.png" alt="break7" class="left-image"/> <img src="break8.png" alt="break8" class="right-image"/>
+	<img src="break9.png" alt="break9" class="center-image half"/>
 	<figcaption>A couple of screenshots of break, showing off some of its capabilities</figcaption>
 </figure>
 
@@ -1240,4 +1240,4 @@ Thank you for your time and consideration.
 
 <hr>
 <a id="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since I'm only posting snippets, it should be safe.  
-<a id="footnote2"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.
+<a id="footnote2"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.  
