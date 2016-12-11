@@ -4,7 +4,7 @@ title: About
 ---
 
 # Hi, I'm Saagar Jha.
-I'm a high school senior at Monta Vista High School in Cupertino, California. I love working with computers and technology of all kinds. You can check out some of my work on my [projects]({{ site.url }}/projects) and [toys]({{ site.url }}/toys) pages. I also post some stuff on my [blog]({{ site.url }}/blog) from time to time. Still curious? I have a [portfolio]({{ site.url }}/about/portfolio) of things I've created in high school as well.
+I'm a senior at Monta Vista High School in Cupertino, California. I love working with computers and technology of all kinds. You can check out some of my work on my [projects]({{ site.url }}/projects) and [toys]({{ site.url }}/toys) pages. I also post some stuff on my [blog]({{ site.url }}/blog) from time to time. Still curious? I have a [portfolio]({{ site.url }}/about/portfolio) of things I've created in high school as well.
 
 ## Contact me
 Got a question? Need to talk to me? [Email](mailto:saagar@saagarjha.com) is usually the best way to get a hold of me for general stuff, but I also have online accounts as well, which may or may not be a better choice:
