@@ -1,6 +1,7 @@
 $showcase_item_height: 30rem;
 
 .showcase {
+	display: none;
 	height: $showcase_item_height;
 	width: 100%;
 	overflow: hidden;
