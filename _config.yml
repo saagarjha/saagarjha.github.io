@@ -4,7 +4,7 @@ description: >
   Saagar Jha's website, projects he's worked on, blog, and cool facts about him.
 url: "https://saagarjha.com"
 enforce_ssl: saagarjha.com
-github_username:  saagarjha
+github_username: saagarjha
 markdown: kramdown
 kramdown:
   input: GFM

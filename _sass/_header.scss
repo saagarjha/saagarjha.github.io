@@ -1,0 +1,39 @@
+$nav_item_y_padding: 1rem;
+$nav_item_x_padding: 2rem;
+$nav_item_font_size: 1.5rem;
+$nav_item_color_transition: 0.2s;
+$nav_item_default_color: #CCC;
+$nav_item_selected_color: #666;
+
+header {
+	nav {
+		ul {
+			list-style-type: none;
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			overflow-x: auto;
+			border-bottom: 1px black solid;
+			text-align: center;
+			white-space: nowrap;
+
+			li {
+				display: inline-block;
+				padding: $nav_item_y_padding $nav_item_x_padding;
+				font-size: $nav_item_font_size;
+				text-align: center;
+
+				a {
+					text-decoration: none;
+					color: $nav_item_default_color;
+					transition: color $nav_item_color_transition;
+
+					&#current-nav-item, &:hover, &:focus {
+						color: $nav_item_selected_color;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+	}
+}
