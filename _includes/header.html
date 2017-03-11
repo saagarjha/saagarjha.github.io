@@ -1,5 +1,5 @@
 {% assign current = page.url | split: "/" %}
-{% if current[1] == "index.html" %}
+{% if current[1] == "index.html" or current.size == 0 %}
 	{% assign current = "home" %}
 {% else %}
 	{% assign current = current[1] %}
@@ -9,7 +9,22 @@
 		<ul>
 			{% assign links = "home,projects,toys,blog,about" | split: "," %}
 			{% for link in links %}
-				<li><a href="{{ site.url }}/{{ link }}" {% if link == current %}{% raw %}id="current-nav-item"{% endraw %}{% endif %}>{{ link | capitalize }}</a></li>
+				{% if link == current %}
+					{% capture class %}
+						class="current-nav-item"
+					{% endcapture %}
+				{% endif %}
+				{% if link == "home" %}
+					{% capture id %}
+						id="home-nav-item"
+					{% endcapture %}
+					{% assign text = "Saagar Jha" %}
+				{% else %}
+					{% assign text = link | capitalize %}
+				{% endif %}
+				<li><a href="{{ site.url }}/{{ link }}"{% if class %}{{ class }}{% endif %}{% if id %}{{ id }}{% endif %}>{{ text }}</a></li>
+				{% assign class = nil %}
+				{% assign id = nil %}
 			{% endfor %}
 		</ul>
 	</nav>

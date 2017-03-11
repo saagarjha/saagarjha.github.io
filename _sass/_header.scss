@@ -1,19 +1,22 @@
-$nav_item_y_padding: 1rem;
+$nav_background_color: #EEE;
+$nav_item_y_padding: 0.75rem;
 $nav_item_x_padding: 2rem;
-$nav_item_font_size: 1.5rem;
+$nav_item_font_size: 1.125rem;
 $nav_item_color_transition: 0.2s;
-$nav_item_default_color: #CCC;
-$nav_item_selected_color: #666;
+$nav_item_default_color: black;
+$nav_item_selected_color: #777;
+$home_nav_item_font_size: 1.25rem;
+$home_nav_item_font_weight: 600;
 
 header {
 	nav {
+		background-color: $nav_background_color;
 		ul {
 			list-style-type: none;
 			width: 100%;
 			padding: 0;
 			margin: 0;
 			overflow-x: auto;
-			border-bottom: 1px black solid;
 			text-align: center;
 			white-space: nowrap;
 
@@ -22,13 +25,19 @@ header {
 				padding: $nav_item_y_padding $nav_item_x_padding;
 				font-size: $nav_item_font_size;
 				text-align: center;
+				font-weight: normal;
 
 				a {
 					text-decoration: none;
 					color: $nav_item_default_color;
 					transition: color $nav_item_color_transition;
 
-					&#current-nav-item, &:hover, &:focus {
+					&#home-nav-item {
+						font-size: $home_nav_item_font_size;
+						font-weight: $home_nav_item_font_weight;
+					}
+
+					&.current-nav-item, &:hover, &:focus {
 						color: $nav_item_selected_color;
 						text-decoration: none;
 					}
