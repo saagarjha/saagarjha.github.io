@@ -1,19 +1,22 @@
+$nav_items: 5;
 $nav_background_color: #EEE;
+$nav_item_min_width: 10rem;
 $nav_item_y_padding: 0.75rem;
 $nav_item_x_padding: 2rem;
+$nav_item_collapsed_x_padding: 0.5rem;
 $nav_item_font_size: 1.125rem;
 $nav_item_color_transition: 0.2s;
 $nav_item_default_color: black;
 $nav_item_selected_color: #777;
 $home_nav_item_font_size: 1.25rem;
 $home_nav_item_font_weight: 500;
+$nav_collapse_width: $nav_item_min_width * $nav_items;
 
 header {
 	nav {
 		background-color: $nav_background_color;
 		ul {
 			list-style-type: none;
-			width: 100%;
 			padding: 0;
 			margin: 0;
 			overflow-x: auto;
@@ -22,10 +25,17 @@ header {
 
 			li {
 				display: inline-block;
-				padding: $nav_item_y_padding $nav_item_x_padding;
+				padding: $nav_item_y_padding 0;
 				font-size: $nav_item_font_size;
 				text-align: center;
 				font-weight: normal;
+				@media all and (max-width: $nav_collapse_width) {
+					padding: $nav_item_y_padding $nav_item_collapsed_x_padding;
+					min-width: 0;
+				}
+				@media not all and (max-width: $nav_collapse_width) {
+					min-width: $nav_item_min_width;
+				}
 
 				a {
 					text-decoration: none;

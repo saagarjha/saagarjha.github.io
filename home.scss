@@ -3,6 +3,12 @@
 
 @import "showcase";
 
+$main_margin: 2rem;
+
+main {
+	margin: $main_margin;
+}
+
 {%assign items = site.showcase | size %}
 
 $showcase_item_time: 10s;
