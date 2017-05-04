@@ -1,4 +1,4 @@
 ---
 title: break
+layout: page
 ---
-
