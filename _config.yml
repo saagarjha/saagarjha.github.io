@@ -13,10 +13,8 @@ permalink: /blog/:year/:month/:day/:title/
 collections:
   showcase:
   projects:
-    output: true
     permalink: /projects/:title/
   toys:
-    output: true
     permalink: /toys/:title/
 gems:
   - jekyll-redirect-from
