@@ -11,7 +11,7 @@ My name is Saagar Jha, and I am currently a senior at Monta Vista High School in
 <blockquote class="note">
 	<p>NOTE:</p>
 	<ol>
-		<li>Much of this code is freely available, either on my <a href="https://github.com/saagarjha">Github</a> or <a href="https://bitbucket.org/saagarjha/">Bitbucket</a> accounts. While the code posted here is the same as what's online, on occasion I have added comments to make it more clear what is going on. Comments marked as <code>// [SNIPPED]</code> indicate that some code has been omitted from the file to keep it at a reasonable size.
+		<li>Much of this code is freely available, either on my <a href="https://github.com/saagarjha">GitHub</a> or <a href="https://bitbucket.org/saagarjha/">Bitbucket</a> accounts. While the code posted here is the same as what's online, on occasion I have added comments to make it more clear what is going on. Comments marked as <code>// [SNIPPED]</code> indicate that some code has been omitted from the file to keep it at a reasonable size.
 		</li>
 		<li>I created this portfolio using Markdown on my website–you can find it <a href="{{ site.url }}/about/portfolio/">here</a>. I chose writing this in Markdown/HTML because has the advantage of:
 			<ul>
@@ -365,7 +365,7 @@ Some of the Bluetooth accessory discovery code, which relies on `CoreBluetooth`.
 </figure>
 
 ## Open AdBlock
-This was the first open source project that I had written myself (as well as my first project with both Swift and Objective-C in it). While I had contributed code to other open source projects (such as [GBA4iOS](https://bitbucket.org/rileytestut/gba4ios) to get it [to compile on iOS 9 as well as fix some crashes](https://bitbucket.org/rileytestut/gba4ios/pull-requests/14/fixed-build-errors-and-some-crashes-some/diff)), this was the first project that I had written the code for start to finish. Open AdBlock initially leveraged a new feature in iOS 9, called content blocking, to block ads in Safari. However, when Apple dropped support for content blocking on 32-bit devices, I rewrote it from scratch to add support for 32-bit back. This required disassembling the SafariServices framework, which provided content blocking, and adding the features that Apple took out. **Open AdBlock is currently the first and only ad blocker in the world for both 32-bit and 64-bit iOS devices, without a jailbreak** (other ad blockers only support iPhone 5s and newer). The source code for Open AdBlock is available on [Github](https://github.com/saagarjha/OpenAdBlock). Here's the core of how it works:
+This was the first open source project that I had written myself (as well as my first project with both Swift and Objective-C in it). While I had contributed code to other open source projects (such as [GBA4iOS](https://bitbucket.org/rileytestut/gba4ios) to get it [to compile on iOS 9 as well as fix some crashes](https://bitbucket.org/rileytestut/gba4ios/pull-requests/14/fixed-build-errors-and-some-crashes-some/diff)), this was the first project that I had written the code for start to finish. Open AdBlock initially leveraged a new feature in iOS 9, called content blocking, to block ads in Safari. However, when Apple dropped support for content blocking on 32-bit devices, I rewrote it from scratch to add support for 32-bit back. This required disassembling the SafariServices framework, which provided content blocking, and adding the features that Apple took out. **Open AdBlock is currently the first and only ad blocker in the world for both 32-bit and 64-bit iOS devices, without a jailbreak** (other ad blockers only support iPhone 5s and newer). The source code for Open AdBlock is available on [GitHub](https://github.com/saagarjha/OpenAdBlock). Here's the core of how it works:
 
 {% raw %}
 
@@ -485,7 +485,7 @@ Pool is an app I wrote in 12 hours for CU Hacks. Since many people want to carpo
 </figure>
 
 ## ions
-ions is a program that I wrote to help me and some fellow students get through my AP Chemistry class. It's written in C for calculators with the Motorola 68000 processor (i.e. TI-89, TI-92, and Voyage 200) for the purpose of making it easy to look up common ions and their properties. The source code as well as prebuilt files are available on [Github](https://github.com/saagarjha/ions).
+ions is a program that I wrote to help me and some fellow students get through my AP Chemistry class. It's written in C for calculators with the Motorola 68000 processor (i.e. TI-89, TI-92, and Voyage 200) for the purpose of making it easy to look up common ions and their properties. The source code as well as prebuilt files are available on [GitHub](https://github.com/saagarjha/ions).
 
 ```c
 #define USE_TI89
@@ -746,7 +746,7 @@ int main(int argc, char **argv) {
 </figure>
 
 ## break
-I consider break to be *the* best software I have ever written. Originally a drop-in replacement for the School Loop app for iOS that my school uses for grade management and viewing, it has grown into much more. I have spent almost a year on it, and while it is still being tested by a couple dozen testers in different schools around California using Apple's [TestFlight](https://developer.apple.com/testflight/) service, I am nearing completion and eventual submission to the App Store. Written in more than 5000 lines of pure Swift, it is a "is a lightweight, native app for accessing School Loop. It aims to provide an easier to use, more feature rich alternative to the official School Loop iOS and Android apps."<sup>[2](#footnote2)</sup> Aiming to fix the frustrations I encountered in the official apps, I reverse-engineered School Loop's grade API endpoints by intercepting the packets the app sent out, which I used in break. break also includes dozens of features that the official app does not include, such as the ability to mark assignments as complete, access a the file locker from a mobile device, preview files, among others. Finally, it deeply leverages existing Apple technologies such as 3D Touch, watchOS APIs, Grand Central Dispatch, QuickLook, Notifications, Touch ID, and Face ID, to make it seamless, well written, and efficient. break's source code is available on [Github](https://github.com/saagarjha/break). Here's the core of the program (quite a bit is removed, since the file is 700+ lines long):
+I consider break to be *the* best software I have ever written. Originally a drop-in replacement for the School Loop app for iOS that my school uses for grade management and viewing, it has grown into much more. I have spent almost a year on it, and while it is still being tested by a couple dozen testers in different schools around California using Apple's [TestFlight](https://developer.apple.com/testflight/) service, I am nearing completion and eventual submission to the App Store. Written in more than 5000 lines of pure Swift, it is a "is a lightweight, native app for accessing School Loop. It aims to provide an easier to use, more feature rich alternative to the official School Loop iOS and Android apps."<sup>[2](#footnote2)</sup> Aiming to fix the frustrations I encountered in the official apps, I reverse-engineered School Loop's grade API endpoints by intercepting the packets the app sent out, which I used in break. break also includes dozens of features that the official app does not include, such as the ability to mark assignments as complete, access a the file locker from a mobile device, preview files, among others. Finally, it deeply leverages existing Apple technologies such as 3D Touch, watchOS APIs, Grand Central Dispatch, QuickLook, Notifications, Touch ID, and Face ID, to make it seamless, well written, and efficient. break's source code is available on [GitHub](https://github.com/saagarjha/break). Here's the core of the program (quite a bit is removed, since the file is 700+ lines long):
 
 ```swift
 // [SNIPPED]
@@ -1234,10 +1234,10 @@ Of course, what I've included here a very small chunk of the full project. break
 
 <hr>
 
-Overall, I have worked with many different technologies ranging from Assembly on embedded systems to server-side development to electrical and hardware engineering. While this portfolio focuses on software that I have worked on personally, technology in general makes it easy to work with others. As such, this portfolio can only attempt to be a true representation of my work. If you're interested, my [Github](https://github.com/saagarjha) and [Bitbucket](https://bitbucket.org/saagarjha/) pages might be able to provide more detail, not only for these projects, but for others that I didn't discuss here.
+Overall, I have worked with many different technologies ranging from Assembly on embedded systems to server-side development to electrical and hardware engineering. While this portfolio focuses on software that I have worked on personally, technology in general makes it easy to work with others. As such, this portfolio can only attempt to be a true representation of my work. If you're interested, my [GitHub](https://github.com/saagarjha) and [Bitbucket](https://bitbucket.org/saagarjha/) pages might be able to provide more detail, not only for these projects, but for others that I didn't discuss here.
 
 Thank you for your time and consideration.
 
 <hr>
-<a id="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since I'm only posting snippets, it should be safe.  
-<a id="footnote2"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.  
+<a id="footnote1"><sup>1</sup></a> Which prohibits posting code in a publicly available manner so that other students from Monta Vista can use it. Since I'm only posting snippets, it should be safe.
+<a id="footnote2"><sup>2</sup></a> Taken directly from the [README](https://github.com/saagarjha/break/blob/master/README.md) file on the project page.
