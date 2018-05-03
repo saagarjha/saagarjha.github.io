@@ -5,14 +5,17 @@ $title_feed_font_size: 1rem;
 $title_feed_bottom: 0.25rem;
 $title_feed_right: 0;
 
-$dl_font_size: 1.5rem;
-$dl_line_height: 1.5;
-$dl_margin_size: 1rem 0.25rem 1rem 2rem;
-$dl_bottom_border: 1px solid #EEE;
+$dt_font_size: 1.5rem;
+$dt_line_height: 1.5;
+$dt_margin_size: 1rem 0.25rem 1rem 2rem;
+$dt_bottom_border: 1px solid #EEE;
+
+$p_width: 1rem;
+$p_margin: 0.25rem;
 
 #title {
 	position: relative;
-	
+
 	a {
 		position: absolute;
 		right: $title_feed_right;
@@ -23,18 +26,21 @@ $dl_bottom_border: 1px solid #EEE;
 
 dl {
 	dt {
-		font-size: $dl_font_size;
-		line-height: $dl_line_height;
-		margin: $dl_margin_size;
-		border-bottom: $dl_bottom_border;
+		font-size: $dt_font_size;
+		line-height: $dt_line_height;
+		margin: $dt_margin_size;
+		border-bottom: $dt_bottom_border;
 	}
+
 	dd {
 		a {
 			display: inline-block;
 		}
+
 		p {
 			display: inline-block;
-			width: 1rem;
+			width: $p_width;
+			margin: $p_margin;
 		}
 	}
 }
