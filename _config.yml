@@ -16,7 +16,7 @@ collections:
     permalink: /projects/:title/
   toys:
     permalink: /toys/:title/
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-feed
