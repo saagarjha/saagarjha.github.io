@@ -1,22 +1,31 @@
+@import "adaptive";
+
 $nav_items: 5;
-$nav_background_color: #EEE;
+$nav_background_color: (
+	light: #EEE,
+	dark: #111,
+);
 $nav_item_min_width: 10rem;
 $nav_item_y_padding: 0.75rem;
 $nav_item_x_padding: 2rem;
 $nav_item_collapsed_x_padding: 0.5rem;
 $nav_item_font_size: 1.125rem;
 $nav_item_color_transition: 0.2s;
-$nav_item_default_color: black;
-$nav_item_selected_color: #777;
-$home_nav_item_font_size: 1.25rem;
-$home_nav_item_font_weight: 500;
+$nav_item_default_color: (
+	light: black,
+	dark: #999,
+);
+$nav_item_selected_color: (
+	light: #777,
+	dark: white,
+);
 $main_nav_item_font_size: 1.25rem;
 $main_nav_item_font_weight: 500;
 $nav_collapse_width: $nav_item_min_width * $nav_items;
 
 header {
 	nav {
-		background-color: $nav_background_color;
+		@include adaptive(background-color, $nav_background_color);
 		ul {
 			list-style-type: none;
 			padding: 0;
@@ -41,19 +50,16 @@ header {
 
 				a {
 					text-decoration: none;
-					color: $nav_item_default_color;
+					@include adaptive(color, $nav_item_default_color);
 					transition: color $nav_item_color_transition;
 
-					&#home-nav-item {
-						font-size: $home_nav_item_font_size;
-						font-weight: $home_nav_item_font_weight;
 					&#main-nav-item {
 						font-size: $main_nav_item_font_size;
 						font-weight: $main_nav_item_font_weight;
 					}
 
 					&.current-nav-item, &:hover, &:focus {
-						color: $nav_item_selected_color;
+						@include adaptive(color, $nav_item_selected_color);
 						text-decoration: none;
 					}
 				}

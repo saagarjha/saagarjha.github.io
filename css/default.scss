@@ -1,6 +1,7 @@
 ---
 ---
 
+@import "adaptive";
 @import "header";
 @import "syntax-highlight";
 
@@ -9,7 +10,14 @@ $fonts: system-ui, "Helvetica Neue", sans-serif;
 $font_size: 1rem;
 $line_height: 1.5;
 
-$link_color: #2E63BC;
+$body_background_color: (
+	light: #FFF,
+	dark: #222,
+);
+$link_color: (
+	light: #3D84FF,
+	dark: #44B4FF,
+);
 
 *, *:before, *:after {
 	box-sizing: border-box;
@@ -20,6 +28,7 @@ body {
 	margin: 0;
 	font-size: $font_size;
 	line-height: $line_height;
+	@include adaptive(background-color, $body_background_color);
 }
 
 p {
@@ -27,7 +36,7 @@ p {
 }
 
 a {
-	color: $link_color;
+	@include adaptive(color, $link_color);
 	&:hover {
 		text-decoration: underline;
 	}
