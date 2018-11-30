@@ -1,0 +1,6 @@
+@mixin adaptive($property, $values) {
+	#{$property}: map-get($values, light);
+	@media(prefers-color-scheme: dark) {
+		#{$property}: map-get($values, dark);
+	}
+}

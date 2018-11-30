@@ -1,10 +1,15 @@
 ---
 ---
 
+@import "adaptive";
+
 $article_width: 55rem;
 $article_margin: 1.5rem auto;
 $article_padding: 1rem;
-$article_color: #333;
+$article_color: (
+	light: black,
+	dark: white,
+);
 
 $p_margin_size: 0.25rem;
 
@@ -36,8 +41,14 @@ $lineno_border_right: 0.1rem solid;
 $highlight_border_radius: $img_border_radius;
 
 $blockquote_margin: 0.5rem 0 0.5rem 2rem;
-$blockquote_color: rgba($article_color, .5);
-$blockquote_left_border: 0.25rem solid rgba($article_color, 0.2);
+$blockquote_color: (
+	light: rgba(map-get($article_color, light), .5),
+	dark: rgba(map-get($article_color, dark), .5),
+);
+$blockquote_left_border: (
+	light: 0.25rem solid rgba(map-get($article_color, light), 0.2),
+	dark: 0.25rem solid rgba(map-get($article_color, dark), 0.2),
+);
 
 $figure_margin: 1rem;
 
@@ -46,7 +57,7 @@ article {
 	display: block;
 	margin: $article_margin;
 	padding: $article_padding;
-	color: $article_color;
+	@include adaptive(color, $article_color);
 }
 
 article * {
@@ -99,8 +110,8 @@ pre {
 
 blockquote {
 	margin: $blockquote_margin;
-	color: $blockquote_color;
-	border-left: $blockquote_left_border;
+	@include adaptive(color, $blockquote_color);
+	@include adaptive(border-left, $blockquote_left_border);
 }
 
 figure {
