@@ -10,6 +10,8 @@ $nav_item_default_color: black;
 $nav_item_selected_color: #777;
 $home_nav_item_font_size: 1.25rem;
 $home_nav_item_font_weight: 500;
+$main_nav_item_font_size: 1.25rem;
+$main_nav_item_font_weight: 500;
 $nav_collapse_width: $nav_item_min_width * $nav_items;
 
 header {
@@ -45,6 +47,9 @@ header {
 					&#home-nav-item {
 						font-size: $home_nav_item_font_size;
 						font-weight: $home_nav_item_font_weight;
+					&#main-nav-item {
+						font-size: $main_nav_item_font_size;
+						font-weight: $main_nav_item_font_weight;
 					}
 
 					&.current-nav-item, &:hover, &:focus {
