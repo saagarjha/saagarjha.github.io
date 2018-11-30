@@ -9,7 +9,7 @@ $article_color: #333;
 $p_margin_size: 0.25rem;
 
 $h_line_height: 1.5;
-$h_margin_size: 0.25rem;
+$h_margin_size: 1rem 0.25rem 0.25rem 0.25rem;
 
 $h1_font_size: 2rem;
 $h2_font_size: 1.5rem;
@@ -28,11 +28,12 @@ $h6_bottom_border: none;
 $img_border_radius: 0.25rem;
 
 $pre_font: 0.8rem Menlo, monospace;
+$pre_line_height: 1.5;
 $pre_tab_size: 4;
-$pre_background_color: #F7F7F7;
 $pre_margin: 1rem;
 $pre_padding: 0.75rem;
-$pre_border_radius: $img_border_radius;
+$lineno_border_right: 0.1rem solid;
+$highlight_border_radius: $img_border_radius;
 
 $blockquote_margin: 0.5rem 0 0.5rem 2rem;
 $blockquote_color: rgba($article_color, .5);
@@ -80,13 +81,20 @@ img {
 pre {
 	font: $pre_font;
 	tab-size: $pre_tab_size;
-	background-color: $pre_background_color;
 	margin: $pre_margin;
 	padding: $pre_padding;
-	border-radius: $pre_border_radius;
+	line-height: $pre_line_height;
 	code {
 		font: $pre_font;
 	}
+	.lineno {
+		text-align: right;
+		border-right: $lineno_border_right;
+	}
+}
+
+.highlight {
+	border-radius: $highlight_border_radius;
 }
 
 blockquote {
