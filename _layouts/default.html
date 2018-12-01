@@ -26,6 +26,14 @@ layout: minify
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 
+		{% for rss in page.post_relative_stylesheets %}
+		<link rel="stylesheet" href="{{ rss }}.css">
+		{% endfor %}
+
+		{% for ss in page.post_stylesheets %}
+		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		{% endfor %}
+
 		{% for rss in layout.post_relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
@@ -34,11 +42,19 @@ layout: minify
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 
-		{% for rss in page.post_relative_stylesheets %}
+		{% for rss in page.portfolio_relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
 
-		{% for ss in page.post_stylesheets %}
+		{% for ss in page.portfolio_stylesheets %}
+		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		{% endfor %}
+
+		{% for rss in layout.portfolio_relative_stylesheets %}
+		<link rel="stylesheet" href="{{ rss }}.css">
+		{% endfor %}
+
+		{% for ss in layout.portfolio_stylesheets %}
 		<link rel="stylesheet" href="/css/{{ ss }}.css">
 		{% endfor %}
 	</head>

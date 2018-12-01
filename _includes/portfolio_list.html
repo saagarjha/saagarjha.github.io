@@ -1,3 +1,15 @@
-{% for e in include.elements %}
-<a href="{{ e.url }}">{{ e.title }}</a>
-{% endfor %}
+<section id="projects">
+	{% for e in include.elements %}
+		<h2 class="project">
+			<span>{{ e.title }}</span>
+			<span>
+				{% for link_hash in e.links %}
+					{% for link in link_hash %}
+						<a href="{{ link[1] }}">{{ link[0] }}</a>
+					{% endfor %}
+				{% endfor %}
+			</span>
+		</h2>
+		<p>{{ e.description }}</p>
+	{% endfor %}
+</section>
