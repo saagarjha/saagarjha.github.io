@@ -1,15 +1,22 @@
 ---
 ---
 
-.title {
+$time_margin: 0rem 0rem;
+
+header {
 	time {
 		color: #AAA;
 		font-size: smaller;
 		font-weight: normal;
 		border-bottom: none;
-		margin: 0.25rem;
+		margin: $time_margin;
 	}
 }
+
 section {
 	margin: 1rem;
+}
+
+.feedback {
+	font-style: italic;
 }
