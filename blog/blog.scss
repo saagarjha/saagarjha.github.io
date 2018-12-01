@@ -5,10 +5,7 @@ $title_feed_font_size: 1rem;
 $title_feed_bottom: 0.25rem;
 $title_feed_right: 0;
 
-$dt_font_size: 1.5rem;
-$dt_line_height: 1.5;
-$dt_margin_size: 1rem 0.25rem 1rem 2rem;
-$dt_bottom_border: 1px solid #EEE;
+$dt_margin_size: 2rem 0.25rem 0.5rem 1.5rem;
 
 $p_width: 1rem;
 $p_margin: 0.25rem;
@@ -24,23 +21,13 @@ $p_margin: 0.25rem;
 	}
 }
 
-dl {
-	dt {
-		font-size: $dt_font_size;
-		line-height: $dt_line_height;
-		margin: $dt_margin_size;
-		border-bottom: $dt_bottom_border;
-	}
+section {
+	margin-left: 0.5rem;
 
-	dd {
-		a {
-			display: inline-block;
-		}
-
-		p {
-			display: inline-block;
-			width: $p_width;
-			margin: $p_margin;
+	h3 {
+		margin: 0rem;
+		time {
+			margin: 0rem 1rem 0rem 2rem;
 		}
 	}
 }
