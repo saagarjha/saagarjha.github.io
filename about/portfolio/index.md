@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Portfolio
+sitemap: false
 relative_stylesheets:
   - portfolio
 ---
