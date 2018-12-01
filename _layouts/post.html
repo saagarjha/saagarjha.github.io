@@ -3,10 +3,14 @@ layout: page
 post_stylesheets:
   - post
 ---
-<section class="title">
+<header>
 	<h1>{{ page.title }}</h1>
 	<time>{{ page.date | date: "%A, %B %d, %Y" }}</time>
-</section>
-<section class="content">
+</header>
+<section>
 	{{ content }}
 </section>
+<footer>
+	<hr>
+	<p class="feedback">Questions? Comments? Corrections? Feel free to <a href="mailto:saagar@saagarjha.com">reach out</a>. Valuable insight is always weclome, and I'd love to share it with others by including it here!</i></p>
+</footer>
