@@ -1,6 +1,7 @@
 ---
 ---
 
+{% comment %}
 {% capture new_line %}
 {% endcapture %}
 {%- assign lines = content | split: new_line -%}
@@ -10,3 +11,5 @@
 		{{ stripped_line | append: new_line }}
 	{%- endif -%}
 {%- endfor -%}
+{% endcomment %}
+{{content}}
