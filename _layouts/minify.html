@@ -1,0 +1,12 @@
+---
+---
+
+{% capture new_line %}
+{% endcapture %}
+{%- assign lines = content | split: new_line -%}
+{%- for line in lines -%}
+	{%- assign stripped_line = line | strip -%}
+	{%- if stripped_line != "" -%}
+		{{ stripped_line | append: new_line }}
+	{%- endif -%}
+{%- endfor -%}
