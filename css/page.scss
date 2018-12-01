@@ -32,7 +32,8 @@ $h6_bottom_border: none;
 
 $img_border_radius: 0.25rem;
 
-$pre_font: 0.8rem Menlo, monospace;
+$pre_font: 0.9rem Menlo, monospace;
+$code_font_family: Menlo, monospace;
 $pre_line_height: 1.5;
 $pre_tab_size: 4;
 $pre_margin: 1rem;
@@ -59,6 +60,7 @@ article {
 	display: block;
 	margin: $article_margin;
 	padding: $article_padding;
+	word-wrap: break-word;
 	@include adaptive(color, $article_color);
 }
 
@@ -97,13 +99,23 @@ pre {
 	margin: $pre_margin;
 	padding: $pre_padding;
 	line-height: $pre_line_height;
+
 	code {
 		font: $pre_font;
 	}
+
 	.lineno {
 		text-align: right;
 		border-right: $lineno_border_right;
 	}
+}
+
+code {
+	font-family: $code_font_family;
+}
+
+samp {
+	font-family: $code_font_family
 }
 
 .highlight {
