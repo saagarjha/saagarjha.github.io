@@ -2,32 +2,32 @@
 ---
 
 $title_feed_font_size: 1rem;
-$title_feed_bottom: 0.25rem;
-$title_feed_right: 0;
 
-$dt_margin_size: 2rem 0.25rem 0.5rem 1.5rem;
+$section_margin_left: 0.5rem;
 
-$p_width: 1rem;
-$p_margin: 0.25rem;
+$post_margin: 0;
+$time_margin: 0rem 1rem 0rem 2rem;
 
-#title {
-	position: relative;
+.title {
+	display: flex;
+	justify-content: space-between;
 
 	a {
-		position: absolute;
-		right: $title_feed_right;
-		bottom: $title_feed_bottom;
 		font-size: $title_feed_font_size;
 	}
 }
 
-section {
-	margin-left: 0.5rem;
+.subtitle {
+	font-size: smaller;
+}
 
-	h3 {
-		margin: 0rem;
-		time {
-			margin: 0rem 1rem 0rem 2rem;
-		}
+section {
+	margin-left: $section_margin_left;
+}
+
+.post {
+	margin: $post_margin;
+	time {
+		margin: $time_margin;
 	}
 }
