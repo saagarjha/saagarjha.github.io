@@ -17,6 +17,7 @@ $link_margin: 0 0.25rem;
 .project {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 
 	a {
 		font-size: $link_font_size;

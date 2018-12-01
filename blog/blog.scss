@@ -11,6 +11,7 @@ $time_margin: 0rem 1rem 0rem 2rem;
 .title {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 
 	a {
 		font-size: $title_feed_font_size;
