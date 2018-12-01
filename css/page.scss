@@ -11,10 +11,10 @@ $article_color: (
 	dark: white,
 );
 
-$p_margin_size: 0.25rem;
+$p_margin_size: 0.25rem 0;
 
 $h_line_height: 1.5;
-$h_margin_size: 1rem 0.25rem 0.25rem 0.25rem;
+$h_margin_size: 1rem 0rem 0.25rem 0rem;
 
 $h1_font_size: 2rem;
 $h2_font_size: 1.5rem;
@@ -51,6 +51,8 @@ $blockquote_left_border: (
 );
 
 $figure_margin: 1rem;
+
+$hr_background_color: #EEE;
 
 article {
 	max-width: $article_width;
@@ -120,4 +122,10 @@ figure {
 
 figcaption {
 	text-align: center;
+}
+
+hr {
+	border: 0;
+	background-color: $hr_background_color;
+	height: 1px;
 }
