@@ -4,7 +4,7 @@ title: About
 ---
 
 # Hi, I'm Saagar Jha.
-I'm a software developer from Cupertino, California, but I spend an inordinate amount of time in southern California. You can check out some of my work on my [projects]({{ site.url }}/projects) and [toys]({{ site.url }}/toys) pages. I also post some stuff on my [blog]({{ site.url }}/blog) from time to time. Still curious? You can find my resume [here]({{ site.url }}/resume.pdf).
+I'm a software engineer from Cupertino, California, but I spend an inordinate amount of time in southern California. You can check out some of my work on my [projects]({{ site.url }}/projects) and [toys]({{ site.url }}/toys) pages. I also post some stuff on my [blog]({{ site.url }}/blog) from time to time. Still curious? You can find my resume [here]({{ site.url }}/resume.pdf).
 
 ## Contact me
 Got a question? Need to talk to me? [Email](mailto:saagar@saagarjha.com) is usually the best way to get a hold of me for general stuff, but I also have online accounts as well, which may or may not be a better choice, depending on what you're trying to contact me about:
