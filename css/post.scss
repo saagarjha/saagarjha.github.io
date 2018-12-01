@@ -1,11 +1,14 @@
 ---
 ---
 
+$time_color: #AAA;
 $time_margin: 0rem 0rem;
+
+$section_margin: 1rem;
 
 header {
 	time {
-		color: #AAA;
+		color: $time_color;
 		font-size: smaller;
 		font-weight: normal;
 		border-bottom: none;
@@ -14,7 +17,7 @@ header {
 }
 
 section {
-	margin: 1rem;
+	margin: $section_margin;
 }
 
 .feedback {
