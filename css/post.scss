@@ -6,6 +6,8 @@ $time_margin: 0rem 0rem;
 
 $section_margin: 1rem;
 
+$p_margin: 1rem 0;
+
 header {
 	time {
 		color: $time_color;
@@ -18,6 +20,10 @@ header {
 
 section {
 	margin: $section_margin;
+
+	p {
+		margin: $p_margin;
+	}
 }
 
 .feedback {
