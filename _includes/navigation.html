@@ -9,14 +9,10 @@
 		{% assign links = "main,blog,projects,toys" | split: "," %}
 		{% for link in links %}
 			{% if link == current %}
-				{% capture class %}
-					class="current-nav-item"
-				{% endcapture %}
+				{% capture class %}class="current-nav-item"{% endcapture %}
 			{% endif %}
 			{% if link == "main" %}
-				{% capture id %}
-					id="main-nav-item"
-				{% endcapture %}
+				{% capture id %}id="main-nav-item"{% endcapture %}
 				{% assign text = "Saagar Jha" %}
 			{% else %}
 				{% assign text = link | capitalize %}
@@ -26,7 +22,7 @@
 			{% else %}
 				{% assign clean_link = link %}
 			{% endif %}
-			<li><a href="{{ site.url }}/{{ clean_link }}"{% if class %}{{ class }}{% endif %}{% if id %}{{ id }}{% endif %}>{{ text }}</a></li>
+			<li><a href="{{ site.url }}/{{ clean_link }}"{% if class %}{{ class | prepend: " " }}{% endif %}{% if id %}{{ id | prepend: " " }}{% endif %}>{{ text }}</a></li>
 			{% assign class = nil %}
 			{% assign id = nil %}
 		{% endfor %}
