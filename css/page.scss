@@ -59,7 +59,17 @@ article {
 	max-width: $article_width;
 	display: block;
 	margin: $article_margin;
-	padding: $article_padding;
+	padding-top: $article_padding;
+	padding-right: $article_padding;
+	padding-bottom: $article_padding;
+	padding-left: $article_padding;
+
+	@supports(padding: max(0px)) {
+		padding-top: $article_padding;
+		padding-right: unquote('max(#{$article_padding}, env(safe-area-inset-right))');
+		padding-bottom: unquote('max(#{$article_padding}, env(safe-area-inset-bottom))');
+		padding-left: unquote('max(#{$article_padding}, env(safe-area-inset-left))');
+	}
 	word-wrap: break-word;
 	@include adaptive(color, $article_color);
 }
