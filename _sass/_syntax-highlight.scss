@@ -1,12 +1,17 @@
 .highlight table td {
-	padding: 5px;
+	padding: 0;
 }
 
 .highlight table pre {
 	margin: 0;
 }
 
-.highlight, .highlight .w {
+pre.highlight {
+	word-wrap: initial;
+	overflow: auto;
+}
+
+.highlight, .highlight .w, code.highlighter-rouge {
 	color: #586e75;
 	background-color: #fdf6e3;
 
