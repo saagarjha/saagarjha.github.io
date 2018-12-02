@@ -10,7 +10,7 @@ kramdown:
   hard_wrap: false
   syntax_highlighter_opts:
     block:
-      line_numbers: true
+      line_numbers: false
 permalink: /blog/:year/:month/:day/:title/
 collections:
   showcase:
