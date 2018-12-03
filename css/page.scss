@@ -36,10 +36,17 @@ $pre_font: 0.9rem Menlo, monospace;
 $pre_line_height: 1.5;
 $pre_tab_size: 4;
 $pre_padding: 0.75rem;
+$pre_border_radius: $img_border_radius;
 $lineno_border_right: 0.1rem solid;
-$highlight_border_radius: $img_border_radius;
+$highlight_border_radius: $pre_border_radius;
 $code_font_family: Menlo, monospace;
-$code_padding:0.25rem;
+$code_padding: 0.25rem;
+$samp_font_family: $code_font_family;
+$samp_padding: $code_padding;
+$samp_border_radius: $highlight_border_radius;
+$kbd_font_family: system-ui, "Helvetica Neue", sans-serif;
+$kbd_padding: $code_padding;
+$kbd_border_radius: $highlight_border_radius;
 
 $blockquote_margin: 0.5rem 0 0.5rem 2rem;
 $blockquote_color: (
@@ -105,6 +112,7 @@ pre {
 	tab-size: $pre_tab_size;
 	padding: $pre_padding;
 	line-height: $pre_line_height;
+	border-radius: $pre_border_radius;
 
 	code {
 		font: $pre_font;
@@ -121,12 +129,20 @@ code {
 	padding: $code_padding;	
 }
 
-samp {
-	font-family: $code_font_family
+.highlight, .highlighter-rouge {
+	border-radius: $highlight_border_radius;
 }
 
-pre.highlight, .highlighter-rouge {
-	border-radius: $highlight_border_radius;
+samp {
+	font-family: $samp_font_family;
+	padding: $samp_padding;
+	border-radius: $samp_border_radius;
+}
+
+kbd {
+	font-family: $kbd_font_family;
+	padding: $kbd_padding;
+	border-radius: $kbd_border_radius;
 }
 
 blockquote {
