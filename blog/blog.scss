@@ -3,8 +3,6 @@
 
 $title_feed_font_size: 1rem;
 
-$section_margin_left: 0.5rem;
-
 $post_margin: 0;
 $time_margin: 0rem 1rem 0rem 2rem;
 
@@ -20,10 +18,6 @@ $time_margin: 0rem 1rem 0rem 2rem;
 
 .subtitle {
 	font-size: smaller;
-}
-
-section {
-	margin-left: $section_margin_left;
 }
 
 .post {
