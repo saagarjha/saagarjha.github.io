@@ -5,11 +5,13 @@ relative_stylesheets:
   - blog
 ---
 
-<h1 class="title">
-	<span>Post Archives</span>
-	<span><a href="{{ site.baseurl }}/feed.xml">Atom Feed</a></span>
-</h1>
-<p class="subtitle">Semi-coherent rambling on topics I find interesting.</p>
+<header>
+	<h1 class="title">
+		<span>Post Archives</span>
+		<span><a href="{{ site.baseurl }}/feed.xml">Atom Feed</a></span>
+	</h1>
+	<p class="subtitle">Semi-coherent rambling on topics I find interesting.</p>
+</header>
 
 
 <div id="karmdown-sucks">
