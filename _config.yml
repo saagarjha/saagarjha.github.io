@@ -1,9 +1,10 @@
 title: Saagar Jha
-email: saagar@saagarjha.com
 description: "Saagar Jha's website."
 url: "https://saagarjha.com"
 enforce_ssl: saagarjha.com
+email: saagar@saagarjha.com
 github_username: saagarjha
+
 markdown: kramdown
 kramdown:
   input: GFM
