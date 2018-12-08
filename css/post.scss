@@ -21,7 +21,7 @@ header {
 section {
 	margin: $section_margin;
 
-	p {
+	& > p {
 		margin: $p_margin;
 	}
 }
