@@ -15,20 +15,22 @@ $p_margin_size: 0.25rem 0;
 
 $h_line_height: 1.5;
 $h_margin_size: 1rem 0rem 0.25rem 0rem;
-
-$h1_font_size: 2rem;
-$h2_font_size: 1.5rem;
-$h3_font_size: 1.25rem;
-$h4_font_size: 1rem;
-$h5_font_size: 0.8rem;
-$h6_font_size: 0.75rem;
-
-$h1_bottom_border: 1px solid #EEE;
-$h2_bottom_border: 1px solid #EEE;
-$h3_bottom_border: none;
-$h4_bottom_border: none;
-$h5_bottom_border: none;
-$h6_bottom_border: none;
+$h_font_size: (
+	1: 2rem,
+	2: 1.5rem,
+	3: 1.25rem,
+	4: 1rem,
+	5: 0.8rem,
+	6: 0.75rem,
+);
+$h_bottom_border: (
+	1: 1px solid #EEE,
+	2: 1px solid #EEE,
+	3: none,
+	4: none,
+	5: none,
+	6: none,
+);
 
 $img_border_radius: 0.25rem;
 
@@ -48,15 +50,29 @@ $kbd_font_family: system-ui, "Helvetica Neue", sans-serif;
 $kbd_padding: $code_padding;
 $kbd_border_radius: $highlight_border_radius;
 
-$blockquote_margin: 0.5rem 0 0.5rem 2rem;
+$blockquote_margin: 1rem 0;
+$blockquote_padding: 0.25rem 0.25rem 0.25rem 1.5rem;
 $blockquote_color: (
-	light: rgba(map-get($article_color, light), .5),
-	dark: rgba(map-get($article_color, dark), .5),
+	light: rgba(map-get($article_color, light), 0.5),
+	dark: rgba(map-get($article_color, dark), 0.5),
 );
 $blockquote_left_border: (
-	light: 0.25rem solid rgba(map-get($article_color, light), 0.2),
-	dark: 0.25rem solid rgba(map-get($article_color, dark), 0.2),
+	light: 0.25rem solid rgba(map-get($article_color, light), 0.25),
+	dark: 0.25rem solid rgba(map-get($article_color, dark), 0.25),
 );
+
+$aside_margin: 1rem 0;
+$aside_padding: 1rem 1rem 1rem 1.25rem;
+$aside_color: $article_color;
+$aside_background_color: (
+	light: rgba(map-get($article_color, light), 0.03125),
+	dark: rgba(map-get($article_color, dark), 0.03125),
+);
+$aside_left_border: (
+	light: 0.25rem solid rgba(map-get($article_color, light), 0.25),
+	dark: 0.25rem solid rgba(map-get($article_color, dark), 0.25),
+);
+$aside_border_radius: $img_border_radius;
 
 $figure_margin: 1rem;
 
@@ -89,15 +105,15 @@ p {
 	margin: $p_margin_size;
 }
 
-{% for i in (1..6) %}
-h{{ i }} {
-	font-size: $h{{ i }}_font_size;
-	line-height: $h_line_height;
-	font-weight: normal;
-	border-bottom: $h{{ i }}_bottom_border;
-	margin: $h_margin_size;
+@for $i from 1 through 6 {
+	h#{$i} {
+		font-size: map-get($h_font_size, $i);
+		line-height: $h_line_height;
+		font-weight: normal;
+		border-bottom: map_get($h_bottom_border, $i);
+		margin: $h_margin_size;
+	}
 }
-{% endfor %}
 
 a {
 	text-decoration: none;
@@ -147,8 +163,26 @@ kbd {
 
 blockquote {
 	margin: $blockquote_margin;
+	padding: $blockquote_padding;
 	@include adaptive(color, $blockquote_color);
 	@include adaptive(border-left, $blockquote_left_border);
+}
+
+aside {
+	margin: $aside_margin;
+	padding: $aside_padding;
+	@include adaptive(color, $aside_color);
+	@include adaptive(background-color, $aside_background_color);
+	@include adaptive(border-left, $aside_left_border);
+	border-radius: $aside_border_radius;
+
+	& > p {
+		margin: 0;
+	}
+
+	.aside-type {
+		font-weight: bold;
+	}
 }
 
 figure {
