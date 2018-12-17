@@ -10,7 +10,7 @@ One feature which was *not* provided was the ability to change the system theme 
 
 ## Setting the system appearance
 
-While applications have always had a way to *get* the system appearance through [`NSAppearance.current`](https://developer.apple.com/documentation/appkit/nsappearance/1531945-current), the ability to programmatically *set* the system appearance for anything other than your application is unsurprisingly not provided. This makes writing software that tries to schedule these changes rather annoying. For a while there was a global user default, `_HIEnableThemeSwitchHotKey`, that allowed for switching between themes with the keyboard shortcut <kbd>^⌥⌘T</kbd> when enabled, but this was removed within a couple of years and most applications ended falling back on AppleScript anyways:
+While applications have always had a way to *get* the system appearance through [`NSAppearance.current`](https://developer.apple.com/documentation/appkit/nsappearance/1531945-current), the ability to programmatically *set* the system appearance for anything other than your application is unsurprisingly not provided. This makes writing software that tries to schedule these changes rather annoying. For a while there was a global user default, `_HIEnableThemeSwitchHotKey`, that allowed for switching between themes with the keyboard shortcut <kbd>⌃⌥⌘T</kbd> when enabled, but this was removed within a couple of years and most applications ended falling back on AppleScript anyways:
 
 ```applescript
 tell application "System Events"
@@ -45,7 +45,7 @@ Make sure to pass in `-F/System/Library/PrivateFrameworks -framework SkyLight` t
 
 We still don't know what the parameter means; since it is a `BOOL` it is likely that `YES` means one of Light or Dark Mode, while `NO` is for setting the other value. Fiddling with the program makes it clear that `YES` corresponds to Dark Mode, and `NO` will enable Light Mode. 
 
-{% include aside.html type="Note" content="DarkNight actually needs to toggle the system appearance, so it needs a way of getting the appearance instead of just setting it. There's a similar function called `SLSGetAppearanceThemeLegacy`, also in SkyLight, that takes no parameters and returns a `BOOL` signifying whether the system is in Dark Mode or not." %}
+{% include aside.html content="DarkNight actually needs to toggle the system appearance, so it needs a way of getting the appearance instead of just setting it. There's a similar function called `SLSGetAppearanceThemeLegacy`, also in SkyLight, that takes no parameters and returns a `BOOL` signifying whether the system is in Dark Mode or not." %}
 
 ## Running on a schedule
 
