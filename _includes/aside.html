@@ -1,6 +1,11 @@
+{% if include.type == nil %}
+	{% assign type="Note" %}
+{% else %}
+	{% assign type=include.type %}
+{% endif %}
 {::options parse_block_html="true" /}
 <aside>
-{{ include.type | append: ":"}}
+{{ type | append: ":"}}
 {: .aside-type}
 
 {{ include.content }}
