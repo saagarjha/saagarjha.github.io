@@ -4,7 +4,8 @@
 $title_feed_font_size: 1rem;
 
 $post_margin: 0;
-$time_margin: 0rem 1rem 0rem 2rem;
+$time_margin: 0rem 1rem 0rem 1.5rem;
+$time_width: 2rem;
 
 .title {
 	display: flex;
@@ -21,12 +22,17 @@ $time_margin: 0rem 1rem 0rem 2rem;
 }
 
 .post {
+	display: flex;
 	margin: $post_margin;
+
 	time {
+		display: inline-block;
+		flex: 0 0 $time_width;
 		margin: $time_margin;
+		text-align: right;
 	}
 
-	p {
-		margin: 1rem;
+	a {
+		min-width: 0;
 	}
 }
