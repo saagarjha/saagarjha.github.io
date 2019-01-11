@@ -13,7 +13,7 @@ One thing to keep in mind before we start is to make sure we understand how XCTe
 
 Since we don't really have access to anything other than XCTest, let's crack it open and see if there's anything good inside. First, we need to locate it:
 
-```shell
+```console
 $ fd XCTest.framework /Applications/Xcode.app/
 /Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/Library/Frameworks/XCTest.framework
 /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework
@@ -27,7 +27,7 @@ Apart from the strange occurrence of XCTest inside of IMSharedUtilities, it seem
 
 Of course, the first thing we do is look for any methods suggestive of 3D Touch, but searching for "3d" returns nothing of interest. We're going to have to get more creative with our search: presumably any relevant method would have some sort of argument to set the pressure, so let's look for "pressure" instead:
 
-```shell
+```console
 $ nm /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/XCTest | grep -i "pressure"
 00000000000200e4 t +[XCPointerEvent pointerEventWithType:buttonType:coordinate:pressure:offset:]
 0000000000020971 t -[XCPointerEvent pressure]
