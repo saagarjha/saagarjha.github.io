@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Scheduling Dark Mode"
-date: 2018-12-01
 ---
 
 The release of OS X Yosemite in 2014 brought with it a complete visual overhaul of the system user interface as a tentpole feature. Alongside the widely anticipated removal of many skeuomorphic elements from Mavericks, in line with the design direction iOS had gone in a year earlier, was the addition of a rather interesting (but slightly overhyped) option in System Preferences to use a dark menu bar and dock. The API for this appearance change had already been laid the previous year in the form of [`NSAppearance`](https://developer.apple.com/documentation/appkit/nsappearance), and some apps took advantage of `NSVisualEffectView`'s [`.dark`](https://developer.apple.com/documentation/appkit/nsvisualeffectview/material/dark) material to provide an appearance that matched that of the system. macOS Mojave has a significantly more extensive version of this behavior that comes "for free" as part of AppKit's Dark Mode support, but back then apps generally relied on watching for an `AppleInterfaceThemeChangedNotification` and updating their appearance to match.
