@@ -8,6 +8,8 @@ $section_margin: 0rem;
 
 $p_margin: 1rem 0;
 
+$img_max_height: 50rem;
+
 header {
 	p {
 		color: $time_color;
@@ -28,4 +30,10 @@ section {
 
 .feedback {
 	font-style: italic;
+}
+
+img {
+	display: block;
+	margin: 0 auto;
+	max-height: $img_max_height;
 }
