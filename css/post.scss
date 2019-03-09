@@ -1,16 +1,20 @@
 ---
 ---
 
+$header_margin: 0 0 1rem 0;
+
 $time_color: #AAA;
 $time_margin: 0.25rem 0rem;
 
 $section_margin: 0rem;
 
-$p_margin: 1rem 0;
+$p_margin: 0 0 1rem 0;
 
 $img_max_height: 50rem;
 
 header {
+	margin: $header_margin;
+
 	p {
 		color: $time_color;
 		font-size: smaller;

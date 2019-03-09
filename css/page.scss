@@ -34,14 +34,14 @@ $h_bottom_border: (
 
 $img_border_radius: 0.25rem;
 
-$pre_font: 0.9rem Menlo, monospace;
+$code_font_family: "SF Mono", Menlo, monospace;
+$pre_font: 0.9rem $code_font_family;
 $pre_line_height: 1.5;
 $pre_tab_size: 4;
 $pre_padding: 0.75rem;
 $pre_border_radius: $img_border_radius;
 $lineno_border_right: 0.1rem solid;
 $highlight_border_radius: $pre_border_radius;
-$code_font_family: Menlo, monospace;
 $code_padding: 0.25rem;
 $samp_font_family: $code_font_family;
 $samp_padding: $code_padding;
