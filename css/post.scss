@@ -12,6 +12,8 @@ $p_margin: 0 0 1rem 0;
 
 $img_max_height: 50rem;
 
+$table_margin: 0 auto 1rem auto;
+
 header {
 	margin: $header_margin;
 
@@ -40,4 +42,8 @@ img {
 	display: block;
 	margin: 0 auto;
 	max-height: $img_max_height;
+}
+
+table {
+	margin: $table_margin;
 }

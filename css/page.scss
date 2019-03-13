@@ -78,6 +78,13 @@ $figure_margin: 1rem;
 
 $hr_background_color: #EEE;
 
+$table_border: 0.5px solid #DDD;
+$table_cell_padding: 0.375rem;
+$tr_alternate_background: (
+	light: rgba(map-get($article_color, light), 0.0625),
+	dark: rgba(map-get($article_color, dark), 0.0625),
+);
+
 article {
 	max-width: $article_width;
 	display: block;
@@ -198,4 +205,20 @@ hr {
 	border: 0;
 	background-color: $hr_background_color;
 	height: 1px;
+}
+
+table {
+	border-spacing: 0;
+}
+
+th, td {
+	padding: $table_cell_padding;
+}
+
+table, th, td {
+	border: $table_border;
+}
+
+tr:nth-child(2n) {
+	@include adaptive(background-color, $tr_alternate_background);
 }
