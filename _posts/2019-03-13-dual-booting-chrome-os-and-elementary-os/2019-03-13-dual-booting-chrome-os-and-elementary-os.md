@@ -19,6 +19,8 @@ Chromebooks require a very specific partition layout; any changes to this (and I
 
 In logical order, the partitions are:
 
+<div class="table-wrapper">
+
 |-----------|------------|
 | Partition | Label      |
 |:---------:|------------|
@@ -35,6 +37,8 @@ In logical order, the partitions are:
 | 11        | RWFW	     |
 | 12        | EFI-SYSTEM |
 |------------------------|
+
+</div>
 
 `KERN-A` is the kernel for Chrome OS, while `ROOT-A` is the root filesystem; `KERN-B` and `ROOT-B` fulfill a similar function and are used by the autoupdate system. These, along with most of the other partitions, don't need to be touched; we will leave them as they are (except for `RWFW`, which the firmware script will modify). The three partitions we care about are `STATE`, `KERN-C`, and `ROOT-C`; the first stores user data and is typically the largest partition, while the other two are currently unused in Chrome OS but are theoretically supposed to serve a purpose similar to that of the other `KERN` and `ROOT` partitions.
 
@@ -121,6 +125,8 @@ $ sudo cgpt show /dev/mmcblk0
 
 The partitions are listed with their labels, partition number, start block, and size. Blocks are 512 bytes in length; notice that while the table is listed in *logical* order, it is not in *physical* order–the blocks are actually in a different order on disk (this, by the way, seems to be what trips up the scripts above). Let's put the partitions in physical order:
 
+<div class="table-wrapper">
+
 |------------------------------------------|
 | Number | Label      | Start   | Size     |
 |:------:|------------|--------:|:--------:|
@@ -137,6 +143,8 @@ The partitions are listed with their labels, partition number, start block, and 
 | 3      | ROOT-A     | 4509696 | 4194304  |
 | 1      | STATE      | 8704000 | 52367312 |
 |------------------------------------------|
+
+</div>
 
 Luckily, the `STATE` partition (which is the first one, logically) is right at the very end physically, which means we can shrink it easily. To do this, we can use `cgpt add`, which takes the partition number with `-i`, starting block with `-b`, and size in blocks with `-s`. For this, we will keep its starting point, block 8704000, the same and shrink the partition down to 10485760 blocks (5 GB):
 
