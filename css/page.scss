@@ -23,6 +23,14 @@ $h_font_size: (
 	5: 0.8rem,
 	6: 0.75rem,
 );
+$h_font_weight: (
+	1: normal,
+	2: normal,
+	3: normal,
+	4: bold,
+	5: bold,
+	6: bold,
+);
 $h_bottom_border: (
 	1: 1px solid #EEE,
 	2: 1px solid #EEE,
@@ -122,7 +130,7 @@ p {
 	h#{$i} {
 		font-size: map-get($h_font_size, $i);
 		line-height: $h_line_height;
-		font-weight: normal;
+		font-weight: map-get($h_font_weight, $i);
 		border-bottom: map_get($h_bottom_border, $i);
 		margin: $h_margin_size;
 	}
