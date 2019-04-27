@@ -5,8 +5,9 @@
 {% endif %}
 {::options parse_block_html="true" /}
 <aside>
-{{ type | append: ":"}}
-{: .aside-type}
+{{ type }}
+{: .aside-type }
 
 {{ include.content }}
+{: .aside-content }
 </aside>
