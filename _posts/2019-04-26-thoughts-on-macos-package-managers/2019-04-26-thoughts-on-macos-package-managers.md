@@ -1,0 +1,123 @@
+---
+layout: post
+title: "Thoughts on macOS Package Managers"
+---
+
+A couple of months ago, I uninstalled [Homebrew](https://brew.sh) and migrated my configuration to [MacPorts](https://www.macports.org). I've been doing a lot of thinking about the state of package management on macOS, and here's what I've come up with based on my experiences using both and interacting with their development communities.
+
+## A brief history of package managers on macOS
+
+Package management on macOS has a somewhat complex history, mostly owing to the fact that unlike most Linux distributions, macOS does not ship with a default package manager out of the box. It's not surprising that one of the first projects to solve the problem of package management, [Fink](http://www.finkproject.org), was created very early, with its initial releases predating that of Mac OS X 10.0 by several months. Using Debian's dpkg and APT as its backend, Fink is still actively maintained, though I haven't looked at it very closely.
+
+MacPorts, on the other hand, was released in 2002 as part of [OpenDarwin](https://en.wikipedia.org/wiki/Darwin_(operating_system)#OpenDarwin), while Homebrew was released seven years later as a "solution" to many of the shortcomings that the author saw in MacPorts. In case it isn't obvious from the introduction, it's these two that we'll be talking about. Sorry, Fink :(
+
+## Architecture
+
+While both MacPorts and Homebrew try to solve the same problem, they really are designed quite differently from each other. These differences become immediately evident once you start using them: I personally feel that MacPorts is clearly the better architected, more mature package manager of the two.
+
+### To `sudo` or not to `sudo`
+
+Homebrew makes several questionable design decisions, but one of these deserves its own section: the choice to [explicitly eschew root](https://github.com/Homebrew/brew/blob/21bb9f6f5b535c35e1c3e5c1e2327c46d5756e80/docs/FAQ.md#why-does-homebrew-say-sudo-is-bad) (in fact, it will refuse to work at all if run this way). This fundamentally is a *very bad idea*: package managers that install software for all users of your computer, as Homebrew does by default, should *always* require elevated privileges to function correctly. This decision has important consequences for both security and usability, especially with the advent of System Integrity Protection in OS X El Capitan.
+
+For quite a while, Homebrew essentially considered itself the owner of `/usr/local` (both metaphorically and literally, as it would change the permissions of the directory), to the point where it would do things like plop its README down directly into this folder. After rootless was introduced, it moved most of its files to subdirectories; however, to maintain the charade of "sudo-less" installation, Homebrew will still trash the permissions of folders inside `/usr/local`. Homebrew's [troubleshooting guide](https://github.com/Homebrew/brew/blob/2be7999878702554f1e1b5f4118978e670e6156c/docs/Troubleshooting.md#check-for-common-issues) lists these out, because reinstalling macOS sets the permissions back to what they're supposed to be and breaks Homebrew in the process:
+
+> If commands fail with permissions errors, check the permissions of `/usr/local`'s subdirectories. If you’re unsure what to do, you can run `cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var opt Cellar Caskroom Frameworks`.
+
+Telling users to use `sudo` as a hammer to smash permissions "issues" that arise as a result of the system trying to fix damage caused by supposedly "sudo-less" software is quite ironic (and this is a bad practice in and of itself: it's teaching users to fix problems by blindly running `sudo chown -R`). But really, this is *bad, bad* advice. Not only does this make Homebrew completely unusable for multi-user systems, it opens up a security hole (actually, [multiple](https://medium.com/0xcc/rootpipe-reborn-part-i-cve-2019-8513-timemachine-root-command-injection-47e056b3cb43)): with `/usr/local/bin` being shared (and the first in `$PATH`!!), it's not hard to see how changing the permissions on this directory leads to trouble. Consider a malicious shell script running with the privileges of the current user (perhaps something [you found on the internet](https://brew.sh/#install)?) that makes a file at `/usr/local/bin/ls`:
+
+```bash
+#!/bin/bash
+
+if [[ $(id -u) -eq 0 ]]; then
+	echo pwned # you didn't happen to run "sudo ls", did you?
+else
+	ls "$@" # move along, nothing to see here
+fi
+```
+
+Boom, now `ls` is booby-trapped for everyone on the system.
+
+{% include aside.html content="Installing Homebrew to another prefix would solve some of these problems, but unfortunately this is broken to the point that Homebrew itself [recommends that you don't do this](https://github.com/Homebrew/brew/blob/21bb9f6f5b535c35e1c3e5c1e2327c46d5756e80/docs/FAQ.md#why-does-homebrew-prefer-i-install-to-usrlocal). This is a shame, since the ability to install packages to a local path (e.g. `~/brew`) is useful as a case where dropping `sudo` actually makes sense." %}
+
+### The MacPorts philosophy
+
+MacPorts, on the other hand, swings so far in the other direction that it's actually borderline inconvenient to use in some sense. Philosophically, MacPorts has a very different perspective of how it should work: it tries to prevent conflicts with the system as much as possible. To achieve this, it sets up a hierarchy under `/opt` (which is the annoying bit, because this directory is not on `$PATH` by default, nor is picked up by compilers without some prodding).
+
+Of course, this design means that there is a single shared installation is among users, so running `port` requires elevated privileges whenever performing an operation that affects all users (which, admittedly, is most of the time). MacPorts is smart about this, though: it will shed permissions and run as the `macports` user whenever possible.
+
+In line with their stated philosophy to prevent conflicts with macOS, MacPorts will set up its own tools in isolation from those provided by the system (in fact, builds run in "sandboxes" under the `macports` user, where attempts to access files outside of the build directory–which includes system tools–are intercepted and blocked). This means MacPorts needs to install some "duplicate" tools (whereas Homebrew will try to use the ones that come with your system where possible), the downside of which is that there is an one-time "up-front" cost as it installs base packages. The upside is that this approach is significantly more contained, which makes it easier to manage and more likely to continue working as macOS changes under it.
+
+Finally, MacPorts just seems to have a lot of thought put into it with regards to certain aspects: for example, [the MacPorts Registry database](https://guide.macports.org/chunked/internals.registry.html) is backed by SQLite by default, which makes easily introspectable in case something goes wrong. Another useful feature is built-in "livechecks" for most ports, which codify upstream version checks and make it easy to see when MacPorts's package index need to be updated.
+
+## Day-to-day usage
+
+Architecture aside, a package manager is only useful if it's possible to actually use it. There are a couple of subareas that I feel are important, and we'll look at how each package manager does for each in turn.
+
+### Package availability
+
+Nominally, MacPorts has [over 20,000 ports](https://www.macports.org/ports.php?by=all) ports available to install by default, while Homebrew has [just shy of 5,000](https://formulae.brew.sh/formula/) formulae (plus a couple thousand more in homebrew/cask). Of course, the only thing this really tells us is that both of them have a *lot* of packages; both of these numbers are pretty meaningless as they contain things like versioned packages and other kinds of number-inflation. If you are looking for a popular, established package, neither will disappoint: packages like `gcc`, `vim`, and `wget` are available and up-to-date on both MacPorts and Homebrew.
+
+Where availability starts to differ is with lesser-used packages: MacPorts seems to have quite a few older packages that Homebrew never picked up, while Homebrew is more likely to have newer packages. Homebrew's are slightly more up-to-date, but I think this is likely a result of having fewer packages to manage and more support to do this job, as well as an increased proclivity to remove packages that are hard to get working on the latest version of macOS. Overall, I don't think it's fair to say that either package manager has an advantage here; ultimately this comes down to what you will end up needing. If you're switching between the two, it's almost guaranteed that there's going to be something that's conspicuously missing from the new package manager to annoy you ;)
+
+### Usability
+
+Homebrew aims to be simple and easy to use, and in general this is true. While I'm neutral on the use of beer-related terminology and emoji, the judicious use of color is quite helpful, as is the well-formatted output. Most common usecases are straightforward, though occasionally commands can end up doing surprising things if you use them in strange ways.
+
+MacPorts, on the other hand, is by no means unusable, but it's not as polished as Homebrew is. The lack of color, as well as somewhat more cluttered and less relevant output, makes it a bit less pleasant to work with (I have a couple of patches that I apply to get the behavior I want, but expecting most users to do this is unreasonable of course). However, overall, MacPorts handles being more complex quite well, and should be pretty serviceable for most users–especially those who have used another package manager.
+
+The two package mangers differ in how they distribute packages: MacPorts almost always builds packages from source, while Homebrew has continuously gotten less and less permissive of letting you do this (opting instead for downloading pre-built binaries). From a usability perspective, binaries are a clear winner: packages install much quicker and are usable nearly immediately, and you don't leave your computer barely usable because it's been compiling the newest version of LLVM for the last four hours. Overall, however, this is less of a problem than it may seem at first, since most package are small and build relatively quickly, making long `port upgrade outdated` invocations quite rare.
+
+### Features
+
+While both package managers have the basic functionality you'd expect from a package manager, MacPorts is generally much more full featured than Homebrew is. Part of this is probably a result of architectural disparities, one example of which being that Homebrew's set of commands to manage the dependency tree is somewhat limited. While this is unfortunate, having these limitations is somewhat reasonable given the underlying design, which would make implementing these features difficult.
+
+Less justifiable is Homebrew's habit of missing useful but slightly less-commonly used functionality (some of which have been mentioned above), and in extreme cases *removing* features entirely, or crippling them so that they are significantly less usable. Into this dubious category goes useful functionality like the ability to find and install older versions of software and customize how the formula is built and installed. In comparison, MacPorts provides hooks to enable users to alter almost every step of the build process, all the way from enabling optional features (do you want to enable Readline support?) to customizing the flags passed to the configure script.
+
+All of this makes MacPorts slightly more complex, but it makes up for this by being more consistent (I like how specifiers like "installed" or "outdated" can be used as with most commands expecting a port name) and [quite well documented](https://guide.macports.org/). In the amount of time I've been using MacPorts, I don't think I ever felt like it was missing anything important, but I experienced this *constantly* when while I was using Homebrew.
+
+## Project and community
+
+Of all the reasons I chose to leave Homebrew for MacPorts, this one is by far the largest; it's also the most personal and opinionated. I'll be direct: I am disillusioned with the direction that Homebrew has been moving in, and from the perspective of a user of and contributor to the software, as well as participant in the open-source community, I feel that Homebrew has become increasingly user-hostile. To be clear, Homebrew isn't a broken project by any means, and I'm not saying those involved with the project are bad people; it's just that I feel that some of the decisions that have been made were not beneficial and have damaged my trust in the project. Fundamentally, I believe that these are fixable issues, and I remain optimistic that these problems can and will be resolved, or at the very least addressed. As it currently stands, though, I feel that MacPorts is a better experience overall, at least in the short time that I have been using it and interacting with its community.
+
+### MacPorts
+
+Over the years, I have interacted with many different open-source communities; in almost all cases this experience has been positive and enriching. My involvement in MacPorts's development is no exception to this: overall, I have not really had any issues, and I have generally had my contributions valued and felt included in the community. While MacPorts seems to be a bit lacking in manpower (which makes things takes slightly longer than I would have expected), the community has been quite welcoming and the maintainers helpful and accommodating. The project is well-structured, with clear delegation of responsibility and guidelines of how to contribute, excellent supporting infrastructure, and extensive documentation. In short, MacPorts, at least until now, has been a enjoyable project to contribute to (I have already done so [many](https://github.com/macports/macports-ports/commits?author=saagarjha) [times](https://github.com/macports/macports-base/commits?author=saagarjha)), just like most of the many others I have worked on.
+
+### Homebrew
+
+By virtue of its popularity, the Homebrew community is refreshingly quick to provide feedback; most of my interactions have been short but productive, and the maintainers are usually supportive if I have any issues. However, over the years I have noticed a shift in attitude: whereas it was once welcoming of issues, Homebrew seems to have become significantly less so recently. The process of actually reporting an bug is needlessly abrasive: for example, if you're using a beta version of macOS and a package fails to build, Homebrew will tell you [in no uncertain terms](https://github.com/Homebrew/brew/blob/6b2dbbc96f7d8aa12f9b8c9c60107c9cc58befc4/Library/Homebrew/exceptions.rb#L418) to [not file an issue](https://github.com/Homebrew/brew/blob/6b2dbbc96f7d8aa12f9b8c9c60107c9cc58befc4/Library/Homebrew/os.rb#L20); which doesn't make sense since they are clearly [interested](https://github.com/Homebrew/homebrew-core/issues/28817) [in](https://github.com/Homebrew/homebrew-core/issues/14418) [collecting](https://github.com/Homebrew/homebrew-core/issues/1957) [this](https://github.com/Homebrew/legacy-homebrew/issues/40837) [information](https://github.com/Homebrew/legacy-homebrew/issues/29988). If you do decide to go ahead with filing an issue in spite of this warning, the default template [will yell at you](https://github.com/Homebrew/homebrew-core/blob/daa8a8ab8c71ae72133a169a6db683b7eeefe1d7/.github/ISSUE_TEMPLATE/Reproducible-Bug-Report.md) to not deviate from the form: not only does this intimidate newcomers to the project by giving the feeling that they might be permanently banned if they make any mistakes, it also restricts discussion by making it impossible to bring up anything outside of the cookie-cutter model of "a package failed to build". Based on my interactions with core team members, this to have been done by design: at some point Homebrew seemed to have changed their metric of "success" to "people filing fewer issues". These changes are in line with this goal, but they seem to create perverse incentives to dissuade people from reporting legitimate issues, which really just means that problems are hidden and more formulae remain silently broken for longer periods of time. In a similar vein, Homebrew's policy of automatically closing and locking issues further prevents follow-ups and associated discussion, needlessly disadvantaging users who do not closely follow the development process and aren't able to voice their opinions "in time".
+
+#### Distilling the issues
+
+Many of Homebrew's project decisions have received significant pushback from the community. While this is to be expected of any large project with the number of users Homebrew has, the actual implementation and execution of these changes has been decidedly poor. The biggest driver behind this is a lack of communication: controversial changes end up being proposed, agreed upon, and implemented with little to no feedback from the community. Two instances of note are the adoption of opt-out Google Analytics and the removal of options.
+
+Homebrew's silent inclusion of opt-out Google Analytics kicked off [quite a bit of conversation](https://github.com/Homebrew/brew/issues/142). Regardless of the original reason for this discussion, there are a couple of things to note:
+
+* The feature could probably be predicted as being controversial before it was introduced.
+* The change was implemented and merged without much deliberation, at least in comparison to the discussion that it lead to later.
+* There was a large backlash from the community.
+* There were multiple complaints of the change being poorly communicated to users.
+* None of the improvements that were suggested were seriously considered, and the conversation was closed with an explicit statement that boils down to "the ship has already sailed, we will not be doing anything and we don't want to talk about this anymore".
+* Multiple references to "Homebrew is an open-source project run by volunteers who owe you nothing".
+
+{% include aside.html content="This is usually the point where \"Homebrew is an open-source project run by volunteers who owe you nothing\" comes up. Yes, Homebrew is open source: I could just fork the project and change the code to my liking. Yes, the Homebrew maintainers are volunteers who spend their free time working on this project. Yes, they have no obligations work on the project, nor do I have the right to ask them to do anything. And from my side, yes, if I don't like this I can just not use Homebrew. I'm not going to argue that this isn't true; I'm saying that this isn't the point. Open source software has traditionally been based around a good-faith, best-effort attempt to be helpful: the whole point of sharing software is so that it can be useful to other people. This doesn't mean maintainers have to bend over backwards to accommodate everyone's desires, and there is no large project in existence that hasn't had to make difficult decisions that leave some of their users unhappy. The point is that it is considered good etiquette to take into the account the needs of your users when making these decisions; nobody can force anyone to do this, nor should they be able to: it's just common courtesy. Sometimes this means recognizing that I am aware that the project is run by volunteers, and that I am taking time out of my day to make the software better, just like they are. Marginalizing the views of people who have concerns and telling them to fork or stop using the software if they're unhappy (a thinly veiled suggestion to \"get lost\") squanders any goodwill they might have and reflects poorly on the project." %}
+
+These characteristics are present in almost every contentious decision that Homebrew has made. [The discussion](https://discourse.brew.sh/t/maintaining-a-tap-to-provide-options-for-a-formula/3871) around the removal of options (which I was significantly involved in) is an almost perfect example of this: I brought up significant concerns regarding the justification provided for the change and came up with multiple compromises (to address problems I felt had not been adequately considered when the change was made), only to be brushed aside because the maintainers were unwilling to entertain any sort of discussion on the topic (the thread has now been locked and has had several comments deleted from it). In short, Homebrew continues to make decisions without consulting the community (and frequently with weak justification behind them), fails to communicate the changes with to users, and refuses to consider reasonable compromises at all. 
+
+One final, important point: it is *unacceptable* for the Homebrew maintainers to abuse tools intended for moderation to quite literally put words in other people's mouths. Removing (or "folding"/hiding, ideally, so that moderation is auditable) spam or non-constructive vitriol that clearly does not contribute to the ongoing discourse is fine, as that's the intended purpose of these tools. What is not OK is silently editing other people's comments so that they say something completely different:
+
+![A comment by DomT4 on GitHub before being edited. It says "You are welcome to use this PR as a basis for future discussion, but the issue has been forced and my resignation has been mandated by Mike, which will be delivered immediately."](BeforeEdit.jpg)
+
+![The comment after being edited by MikeMcQuaid. It now says "You are welcome to use this PR as a basis for future discussion and my resignation will be delivered immediately."](AfterEdit.jpg)
+
+{% include aside.html content="Apologies for the poor quality; this comment (from [this thread](https://github.com/Homebrew/brew/pull/4864), [screenshot of the deletion](DeletedEdit.png)) was deleted shortly after it was [brought up on Hacker News](https://news.ycombinator.com/item?id=19066630) and the only copy of it that I had was screenshots I could pull from Twitter." %}
+
+Now, I will not claim to understand the circumstances surrounding the resignation of Dominyk Tiller, but it's pretty clear  that he felt like he was forced out; changing his words to remove this sentiment in a non-obvious way (note that GitHub's UI indicating an edited comment is not particularly conspicuous) is inappropriate and frankly makes it difficult to assume good faith. As I mentioned in a brief email exchange I had with Mike McQuaid, the "correct" response would have been to voice his disagreement with Dominyk's point of view by replying with another comment, with his own profile attached to it to signify that it was his view and not Dominyk's. I think it also goes without saying that deleting the comment (and by extension the edits to it) and hoping nobody would notice does *not* help the situation, nor does it restore any trust in his actions or put him in a particularly good light.
+
+#### Moving forwards
+
+The question of what Homebrew can do to improve itself is simultaneously both simple and complex. The simple answer would be to work on work on fixing the issues I listed above: making it easier for people to contribute, improving communications with users, and listening to their feedback when they have some to give would go a long way to ameliorate the current situation. But some fundamental issues would still remain, and these are not as easy to change: these are problems in the attitudes and way the project is run. Homebrew needs to realize that the maintainers of the project are not the only "volunteers" involved in the development process, and ignoring users or making them feel like their contributions are not valued actively harms the project. And finally, it needs to recognize where the boundaries are with regards to effective moderation. Most other open source projects do this fine: if they need a model to emulate, they certainly have a lot of choices to pick from.
+
+## Conclusion
+
+I think I've gotten a pretty good taste of both MacPorts and Homebrew, and as it stands currently I strongly recommend MacPorts for being better architected and having a better development community. Homebrew's user interface and package availability is a bit nicer than MacPorts, and it's arguably easier to use by beginners at the cost of being more inconvenient for advanced users and breaking more often. Fundamentally, Homebrew has some issues that it needs to fix before I can consider going back to it; as such, I expect to stay with MacPorts for the foreseeable future.
