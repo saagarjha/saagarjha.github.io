@@ -73,6 +73,8 @@ $aside_left_border: (
 	dark: 0.25rem solid rgba(map-get($article_color, dark), 0.25),
 );
 $aside_border_radius: $img_border_radius;
+$aside_type_font_size: 1.25rem;
+$aside_type_margin: 0 0 0.25rem 0;
 
 $figure_margin: 1rem;
 
@@ -188,12 +190,14 @@ aside {
 	@include adaptive(border-left, $aside_left_border);
 	border-radius: $aside_border_radius;
 
-	& > p {
+	.aside-content {
 		margin: 0;
 	}
 
 	.aside-type {
 		font-weight: bold;
+		font-size: $aside_type_font_size;
+		margin: $aside_type_margin;	
 	}
 }
 
