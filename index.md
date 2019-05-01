@@ -7,7 +7,7 @@ title: Saagar Jha
 I'm a software engineer from Cupertino, California, but I spend an inordinate amount of time in the southern part of the state. You can check out some of my work on my [projects]({{ site.url }}/projects) and [toys]({{ site.url }}/toys) pages. I also post some stuff on my [blog]({{ site.url }}/blog) from time to time. Still curious? You can find my resume [here]({{ site.url }}/resume.pdf).
 
 ## Contact me
-Got a question? Need to talk to me? [Email](mailto:{{ site.email }}) is generally the best way to get a hold of me, but I also have other online accounts as well, which may or may not be a better choice depending on what you want to talk about:
+Got a question? Need to talk to me? [Email](mailto:{{ site.email }}) is generally the best way to get ahold of me, but I also have other online accounts as well, which may or may not be a better choice depending on what you want to talk about:
 
 - [{{ site.github_username }}](https://github.com/{{ site.github_username }}) on GitHub
 - [saagarjha](https://news.ycombinator.com/user?id=saagarjha) on Hacker News
