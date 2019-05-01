@@ -36,7 +36,7 @@ $ nm /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platfo
 000000000012d1d8 s _OBJC_IVAR_$_XCPointerEvent._pressure
 ```
 
-Bingo! We have a couple of interesting methods, namely `-[XCPointerEventPath pressDownWithPressure:atOffset:]` and `-[XCPointerEvent pointerEventWithType:buttonType:coordinate:pressure:offset:]`. We don't know how to call these, but we can load the binary into Hopper and find places calling these methods, which leads us to `-[XCUIEventGenerator forcePressAtPoint:orientation:handler:]` (it looks like [Craig isn't the only one](https://youtu.be/0qwALOOvUik?t=5688) who mixes up Force Touch and 3D Touch).
+Bingo! We have a couple of interesting methods, namely `-[XCPointerEventPath pressDownWithPressure:atOffset:]` and `-[XCPointerEvent pointerEventWithType:buttonType:coordinate:pressure:offset:]`. We don't know how to call these, but we can load the binary into Hopper and find places calling these methods, which leads us to `-[XCUIEventGenerator forcePressAtPoint:orientation:handler:]`. (It looks like [Craig isn't the only one](https://youtu.be/0qwALOOvUik?t=5688) who mixes up Force Touch and 3D Touch.)
 
 {% include aside.html content="If you search the list of methods for \"force\", you may notice that `XCUIElement`'s `PrivateEvents` category defines an unexposed `forcePress` method. If all you need to do is simulate a 3D touch, this is enough; however, this method is not enough for simulating peek and pop because we need precise control over pressure." %}
 
@@ -46,7 +46,7 @@ Let's focus on the code that looks like it's generating a 3D Touch:
 
 ![Hopper disassembly of XCTest focused on -[XCUIEventGenerator forcePressAtPoint:orientation:handler:]](HopperXCTest.png)
 
-It appears that all we need to do is create an `XCPointerEventPath` (pressing down, then lifting up at the right spot), add it to an `XCSynthesizedEventRecord`, then tell `XCTRunnerDaemonSession.sharedSession` to synthesize the event. First, we can set up headers for the methods we need to call, basing parameter types how they're being used:
+It appears that all we need to do is create an `XCPointerEventPath` (pressing down, then lifting up at the right spot), add it to an `XCSynthesizedEventRecord`, then tell `XCTRunnerDaemonSession.sharedSession` to synthesize the event. First, we can set up headers for the methods we need to call, basing parameter types on how they're being used:
 
 ```objc
 #import <XCTest/XCTest.h>
