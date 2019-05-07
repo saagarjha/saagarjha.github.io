@@ -80,6 +80,10 @@ $aside_left_border: (
 	light: 0.25rem solid rgba(map-get($article_color, light), 0.25),
 	dark: 0.25rem solid rgba(map-get($article_color, dark), 0.25),
 );
+$aside_update_left_border: (
+	light: 0.25rem solid #0C0,
+	dark: 0.25rem solid #070,
+);
 $aside_border_radius: $img_border_radius;
 $aside_type_font_size: 1.25rem;
 $aside_type_margin: 0 0 0.25rem 0;
@@ -206,6 +210,10 @@ aside {
 		font-weight: bold;
 		font-size: $aside_type_font_size;
 		margin: $aside_type_margin;	
+	}
+
+	&#aside-update {
+		@include adaptive(border-left, $aside_update_left_border);
 	}
 }
 
