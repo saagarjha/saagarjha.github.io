@@ -23,6 +23,10 @@ $link_color: (
 	box-sizing: border-box;
 }
 
+:root {
+	color-scheme: light dark;
+}
+
 body {
 	font-family: $fonts;
 	margin: 0;
