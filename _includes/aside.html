@@ -1,15 +1,20 @@
 {% if include.type == nil %}
 	{% assign type="Note" %}
-{% else if include.type == "Update" and include.date %}
+{% elsif include.type == "Update" and include.date %}
 	{% assign type=include.type | append: ", " | append: include.date %}
 	{% assign update=true %}
 {% else %}
 	{% assign type=include.type %}
-}
 {% endif %}
 {::options parse_block_html="true" /}
 {% if update %}
-<aside id="aside-update">
+<aside class="aside-update">
+{% elsif type == "Warning" %}
+<aside class="aside-warning">
+{% elsif type == "Disclaimer" %}
+<aside class="aside-disclaimer">
+{% elsif type == "Fun fact" %}
+<aside class="aside-fun-fact">
 {% else %}
 <aside>
 {% endif %}

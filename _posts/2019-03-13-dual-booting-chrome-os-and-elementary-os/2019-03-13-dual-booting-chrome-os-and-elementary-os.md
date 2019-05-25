@@ -186,11 +186,11 @@ $ sudo /sbin/reboot
 
 On startup, press <kbd>Ctrl</kbd>+<kbd>L</kbd> this time; this will start legacy boot. Depending on the options you selected earlier when you installed the new firmware, the USB will either automatically boot or you will have to quickly press <kbd>Esc</kbd> and select your USB device from the boot menu.
 
-{% include aside.html type="Note" content="You may get an error saying \"graphics initialization failed\"; apparently this is a bug that can be fixed [by typing \"help\" and pressing enter twice](https://ubuntuforums.org/showthread.php?t=1594003)." %}
+{% include aside.html content="You may get an error saying \"graphics initialization failed\"; apparently this is a bug that can be fixed [by typing \"help\" and pressing enter twice](https://ubuntuforums.org/showthread.php?t=1594003)." %}
 
 Once you have booted, start the installer.
 
-{% include aside.html type="Note" content="On my trackpad, clicks didn't work at all; you can either use an external mouse or tap to click to get around this. If you do accidentally click, you may end up in a state where it's no longer possible to click; in that case just switch to a different console with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1</kbd> (Forward) and back with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F7</kbd> (Brightness up)." %}
+{% include aside.html content="On my trackpad, clicks didn't work at all; you can either use an external mouse or tap to click to get around this. If you do accidentally click, you may end up in a state where it's no longer possible to click; in that case just switch to a different console with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1</kbd> (Forward) and back with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F7</kbd> (Brightness up)." %}
 
 Go through the setup as usual, until you reach the bit where it asks you about your installation type. Make sure to select the option for "Something else" here:
 
