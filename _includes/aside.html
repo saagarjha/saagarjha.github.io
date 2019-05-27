@@ -1,7 +1,11 @@
 {% if include.type == nil %}
 	{% assign type="Note" %}
-{% elsif include.type == "Update" and include.date %}
-	{% assign type=include.type | append: ", " | append: include.date %}
+{% elsif include.type == "Update" %}
+	{% if include.date %}
+		{% assign type=include.type | append: ", " | append: include.date %}
+	{% else %}
+		{% assign type=include.type %}
+	{% endif %}
 	{% assign update=true %}
 {% else %}
 	{% assign type=include.type %}
