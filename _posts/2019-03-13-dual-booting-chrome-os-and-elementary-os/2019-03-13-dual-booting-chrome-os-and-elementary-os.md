@@ -169,11 +169,11 @@ When Chrome OS boots up, it will repair itself, taking about five minutes (there
 
 {% include aside.html type="Warning" content="Doing this from Linux (e.g. using GParted) seems to cause Chrome OS to throw the \"Chrome OS is missing or damaged\" error, hence the use of Chrome OS." %}
 
-Once you're back in a shell, use `mkfs.ext4` to initialize the partitions we will be using for elementary OS (`KERN-C` and `ROOT-C`, which are the sixth and seventh partitions in `/dev/mmblk0` for my Chromebook):
+Once you're back in a shell, use `mkfs.ext4` to initialize the partitions we will be using for elementary OS (`KERN-C` and `ROOT-C`, which are the sixth and seventh partitions in `/dev/mmcblk0` for my Chromebook):
 
 ```console
-$ sudo /sbin/mkfs.ext4 /dev/mmblk0p6
-$ sudo /sbin/mkfs.ext4 /dev/mmblk0p7
+$ sudo /sbin/mkfs.ext4 /dev/mmcblk0p6
+$ sudo /sbin/mkfs.ext4 /dev/mmcblk0p7
 ```
 
 ### Installing elementary OS
@@ -213,13 +213,13 @@ $ sudo mkdir /mnt/boot
 Mount the boot partition, `KERN-C`, there (*not* the whole device, just the partition):
 
 ```console
-$ sudo mount /dev/mmblk0p6 /mnt/boot
+$ sudo mount /dev/mmcblk0p6 /mnt/boot
 ```
 
 We need to install GRUB to this partition now. We will need to pass it the `--boot-directory` flag to tell it where our boot directory is, and possibly `--force` if it complains about blocklists being unreliable. In all, the command should look something like this:
 
 ```console
-$ sudo grub-install --boot-directory=/mnt/boot /dev/mmblk0 --force
+$ sudo grub-install --boot-directory=/mnt/boot /dev/mmcblk0 --force
 ```
 
 Notice that we did not use the partition here; this is for the *entire* device. This will set up the correct MBR records and allow us to boot straight into elementary OS next time we perform a legacy boot. Reboot your computer, remove the Live USB, and press <kbd>Ctrl</kbd>+<kbd>L</kbd> at startup: the Chromebook *should* go directly into Linux. Pressing <kbd>Ctrl</kbd>+<kbd>D</kbd> should take you to Chrome OS instead (do check this: Linux is less picky about booting, and these steps can easily lead to a broken Chrome OS install even when elementary OS boots fine). If this doesn't work, see below for troubleshooting.
