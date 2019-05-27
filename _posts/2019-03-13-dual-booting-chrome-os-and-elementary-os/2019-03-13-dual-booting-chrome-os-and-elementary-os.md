@@ -192,6 +192,8 @@ Once you have booted, start the installer.
 
 {% include aside.html content="On my trackpad, clicks didn't work at all; you can either use an external mouse or tap to click to get around this. If you do accidentally click, you may end up in a state where it's no longer possible to click; in that case just switch to a different console with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1</kbd> (Forward) and back with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F7</kbd> (Brightness up)." %}
 
+{% include aside.html type="Update" content="The fix for this appears to have been merged into a later kernel, somewhere around 4.16. Updating the kernel (or [patching](Samsung-Chomebook-Patches.zip), building, and installing the kernel yourself) should make the trackpad work correctly." %}
+
 Go through the setup as usual, until you reach the bit where it asks you about your installation type. Make sure to select the option for "Something else" here:
 
 ![Ubiquity installer, showing the "Installation type" screen. The "Something else" option is selected.](InstallationType.png)
