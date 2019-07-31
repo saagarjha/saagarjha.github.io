@@ -149,14 +149,14 @@ The partitions are listed with their labels, partition number, start block, and 
 Luckily, the `STATE` partition (which is the first one, logically) is right at the very end physically, which means we can shrink it easily. To do this, we can use `cgpt add`, which takes the partition number with `-i`, starting block with `-b`, and size in blocks with `-s`. For this, we will keep its starting point, block 8704000, the same and shrink the partition down to 10485760 blocks (5 GB):
 
 ```console
-$ sudo cpgt -i 1 -b 8704000 -s 10485760 /dev/mmcblk0
+$ sudo cpgt add -i 1 -b 8704000 -s 10485760 /dev/mmcblk0
 ```
 
 Unfortunately, `KERN-C` and `ROOT-C` are wedged in the middle of other partitions, making it impossible to increase their size without overwriting the subsequent ones. However, we can just change their base to fall right after `STATE` and expand them in the new space we have created. Thus, `KERN-C` (the sixth partition) will now start at block 8704000+10485760+1=19189761 and span 1048576 blocks, while `ROOT_C` (the seventh) starts at 19189761+1048576+1=20238337. `ROOT-C`'s size is the amount we shaved off of `STATE` minus the size of `KERN-C`, or (52367312-10485760)-1048576=40832976. In `cgpt`, this translates to
 
 ```console
-$ sudo cgpt -i 6 -b 19189761 -s 1048576 /dev/mmcblk0
-$ sudo cgpt -i 7 -b 20238337 -s 40832976 /dev/mmcblk0
+$ sudo cgpt add -i 6 -b 19189761 -s 1048576 /dev/mmcblk0
+$ sudo cgpt add -i 7 -b 20238337 -s 40832976 /dev/mmcblk0
 ```
 
 With this done, you can reboot the system:
