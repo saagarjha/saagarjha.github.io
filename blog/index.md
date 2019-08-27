@@ -8,7 +8,7 @@ relative_stylesheets:
 <header>
 	<h1 class="title">
 		<span>Post Archives</span>
-		<span><a href="{{ site.baseurl }}/feed.xml">Atom Feed</a></span>
+		<span><a rel="alternate" type="application/atom+xml" href="{{ site.baseurl }}/feed.xml">Atom Feed</a></span>
 	</h1>
 	<p class="subtitle">Semi-coherent rambling on topics I find interesting.</p>
 </header>
