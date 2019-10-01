@@ -1,4 +1,7 @@
-<title>{{ page.title }}</title>
 <meta charset="utf-8">
 <meta name=viewport content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ page.title }}</title>
+<link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
+<meta name="description" content="{{ site.description }}">
 <link rel="alternate" href="/feed.xml" title="Atom feed" type="application/atom+xml">
+<meta name="generator" content="Jekyll {{ jekyll.version }}">

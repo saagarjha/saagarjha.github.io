@@ -9,9 +9,9 @@ I'm a software engineer from Cupertino, California, but I spend an inordinate am
 ## Contact me
 Got a question? Need to talk to me? [Email](mailto:{{ site.email }}) is generally the best way to get ahold of me, but I also have other online accounts as well, which may or may not be a better choice depending on what you want to talk about:
 
-- [{{ site.github_username }}](https://github.com/{{ site.github_username }}) on GitHub
-- [saagarjha](https://news.ycombinator.com/user?id=saagarjha) on Hacker News
-- [saagarjha](https://stackoverflow.com/users/5230900/saagarjha) on Stack Overflow
+- [{{ site.github_username }}](https://github.com/{{ site.github_username }}){: rel="me"} on GitHub
+- [saagarjha](https://news.ycombinator.com/user?id=saagarjha){: rel="me"} on Hacker News
+- [saagarjha](https://stackoverflow.com/users/5230900/saagarjha){: rel="me"} on Stack Overflow
 
 ## About this website
 I purchased the domain for this website through the [Google Domains](https://domains.google/) registrar, and it's hosted on [GitHub Pages](https://pages.github.com). The website itself is statically generated using [Jekyll](https://jekyllrb.com) from a set of [Markdown](https://daringfireball.net/projects/markdown/) and [Sassy CSS](http://sass-lang.com) files. I'm not a web developer or designer by any means, so this website may break or not display correctly on your machine (or even mine, if I'm not looking hard enough). If this happens (and you're using a modern browser), please do let me know and I'll try to fix it.
