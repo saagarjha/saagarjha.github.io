@@ -126,7 +126,7 @@ The commpage on macOS serves a purpose similar to [vsyscall on Linux](https://lw
 With all that done, we can write a simple tool that can update private_data. Make sure to run it as root, or it will exit with `KERN_INVALID_ARGUMENT` (== 4).
 
 ```c
-#include <cstdint.h>
+#include <stdint.h>
 #include <mach/mach_host.h>
 #include <stdio.h>
 
