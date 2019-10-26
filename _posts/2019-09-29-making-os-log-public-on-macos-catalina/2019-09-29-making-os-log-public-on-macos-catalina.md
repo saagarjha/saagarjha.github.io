@@ -3,7 +3,7 @@ layout: post
 title: "Making os_log public on macOS Catalina"
 ---
 
-Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) launched in macOS Sierra and iOS 10 as a replacement for [Apple System Logger](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/asl.3.html) (which itself replaced the [syslog(3)](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/syslog.3.html) API). Along with it came changes in how logs were organized and persisted, plus a new `log` command and redesigned Console app to make sense of these messages. One important change, however, [relates to privacy](https://developer.apple.com/documentation/os/logging#1841411): by default, dynamic data not specifically annotated with the `%{public}` keyword will not be logged–the format specifier will be replaced with "&lt;private&gt;" instead of the identified object. While this helps prevent against accidentally leaking personal information, it can be inconvenient when debugging issues. To bypass this restriction, the `log` command allowed for changing the logging configuration to display all data:
+Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) launched in macOS Sierra and iOS 10 as a replacement for [Apple System Logger](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/asl.3.html) (which itself replaced the [syslog(3)](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/syslog.3.html) API). Along with it came changes in how logs were organized and persisted, plus a new `log` command and redesigned Console app to make sense of these messages. One important change, however, [related to privacy](https://developer.apple.com/documentation/os/logging#1841411): by default, dynamic data not specifically annotated with the `%{public}` keyword will not be logged–the format specifier will be replaced with "&lt;private&gt;" instead of the identified object. While this helps prevent against accidentally leaking personal information, it can be inconvenient when debugging issues. To bypass this restriction, the `log` command allowed for changing the logging configuration to display all data:
 
 ```console
 $ sudo log config --status
@@ -24,7 +24,7 @@ While `log` no longer lets us set this secret configuration option, it's not gon
 
 ## You must be this tall to ride
 
-As with any reverse-engineering exercise, we pull out our trusty disassembler and point it at `/usr/bin/log`. We're looking for the code that handles configurations, so it makes sense to look for the error we got earlier: searching for "Invalid Modes" gives us a string that we can cross-reference to a function that clearly handles parsing options for the `config` subcommand:
+As with any reverse-engineering exercise, we pull out our trusty disassembler and point it at `/usr/bin/log`. We're looking for the code that handles configurations, so it makes sense to look for the error we got earlier; searching for "Invalid Modes" gives us a string that we can cross-reference to a function that clearly handles parsing options for the `config` subcommand:
 
 ![Hopper disassembly of the configuration parsing function inside of log](HopperConfigParser.png)
 
@@ -61,17 +61,17 @@ Enter your debugger command(s).  Type 'DONE' to end.
 Process 27107 launched: '/usr/bin/log' (x86_64)
 (lldb)  thread return 1
 (lldb)  continue
-Process 27138 resuming
+Process 27107 resuming
 
 Command #2 'continue' continued the target.
 (lldb)  thread return 1
 (lldb)  continue
-Process 27138 resuming
+Process 27107 resuming
 
 Command #2 'continue' continued the target.
 (lldb)  thread return 1
 (lldb)  continue
-Process 27138 resuming
+Process 27107 resuming
 
 Command #2 'continue' continued the target.
 2019-09-29 04:20:17.637538-0700 log[27107:5793152] Changed system mode to 0x1000000
@@ -126,8 +126,8 @@ The commpage on macOS serves a purpose similar to [vsyscall on Linux](https://lw
 With all that done, we can write a simple tool that can update private_data. Make sure to run it as root, or it will exit with `KERN_INVALID_ARGUMENT` (== 4).
 
 ```c
-#include <stdint.h>
 #include <mach/mach_host.h>
+#include <stdint.h>
 #include <stdio.h>
 
 const uint32_t private_data_flag = 1 << 24;
@@ -144,8 +144,9 @@ int main(int argc, char **argv) {
 		} else if (!strcmp(*argv, "disable")) {
 			return host_set_atm_diagnostic_flag(mach_host_self(), diagnostic_flag & ~private_data_flag);
 		}
+	} else {
+		fprintf(stderr, "Usage: %s <status|enable|disable>\n", *argv);
 	}
-	fprintf(stderr, "Usage: %s <status|enable|disable>\n", *argv);
 }
 ```
 
