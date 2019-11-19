@@ -33,13 +33,6 @@ body {
 	font-size: $font_size;
 	line-height: $line_height;
 	@include adaptive(background-color, $body_background_color);
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-}
-
-main {
-	flex: 1;
 }
 
 p {
