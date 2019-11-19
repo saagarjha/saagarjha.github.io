@@ -11,6 +11,8 @@ $article_color: (
 	dark: white,
 );
 
+$copyright_padding: 0.5rem 1rem 1rem 1rem;
+
 $p_margin_size: 0.25rem 0;
 
 $h_line_height: 1.5;
@@ -136,6 +138,19 @@ article {
 
 article * {
 	max-width: 100%;
+}
+
+#copyright {
+	p {
+		max-width: $article_width;
+		margin: $article_margin;
+		padding: $copyright_padding;
+		@include adaptive(color, $article_color);
+	}
+
+	@media print {
+		display: none;
+	}
 }
 
 p {
