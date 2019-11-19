@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Making os_log public on macOS Catalina"
+title: "Making os_log Public on macOS Catalina"
 ---
 
-Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) launched in macOS Sierra and iOS 10 as a replacement for [Apple System Logger](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/asl.3.html) (which itself replaced the [syslog(3)](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/syslog.3.html) API). Along with it came changes in how logs were organized and persisted, plus a new `log` command and redesigned Console app to make sense of these messages. One important change, however, [related to privacy](https://developer.apple.com/documentation/os/logging#1841411): by default, dynamic data not specifically annotated with the `%{public}` keyword will not be logged–the format specifier will be replaced with "&lt;private&gt;" instead of the identified object. While this helps prevent against accidentally leaking personal information, it can be inconvenient when debugging issues. To bypass this restriction, the `log` command allowed for changing the logging configuration to display all data:
+Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) launched in macOS Sierra and iOS 10 as the successor to [Apple System Logger](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/asl.3.html)–itself a replacement for the [syslog(3)](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/syslog.3.html) API–and alongside it came changes in how logs were organized and persisted, plus a new `log` command and redesigned Console app to make sense of these messages. One important change, however, [related to privacy](https://developer.apple.com/documentation/os/logging#1841411): by default, dynamic data not specifically annotated with the `%{public}` keyword will not be logged–the format specifier will be replaced with "&lt;private&gt;" instead of the identified object. While this helps prevent against accidentally leaking personal information, it can be inconvenient when debugging issues. To bypass this restriction, the `log` command used to allow for changing the logging configuration to display all data:
 
 ```console
 $ sudo log config --status
@@ -82,7 +82,7 @@ System mode = DEFAULT PRIVATE_DATA
 
 ## Enabling private_data by hand
 
-Now that we know it's possible to set private_data from the `log` binary, we have a number of options. The first would be to write a dynamic library that interposed `_os_trace_is_development_build`, like so:
+Now that we know it's possible to set private_data from the `log` binary, we have a number of options. The first would be to write a dynamic library that interposes `_os_trace_is_development_build`, like so:
 
 ```c
 int _os_trace_is_development_build();
@@ -123,7 +123,7 @@ The commpage on macOS serves a purpose similar to [vsyscall on Linux](https://lw
 
 ## Putting it all together
 
-With all that done, we can write a simple tool that can update private_data. Make sure to run it as root, or it will exit with `KERN_INVALID_ARGUMENT` (== 4).
+With all that done, we can write a simple tool to update private_data. Make sure to run it as root, or it will exit with `KERN_INVALID_ARGUMENT` (== 4).
 
 ```c
 #include <mach/mach_host.h>
