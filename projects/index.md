@@ -1,7 +1,7 @@
 ---
 layout: portfolio
 title: Projects
-subtitle: Things that I have put a reasonable amount of time and effort into, and are not likely to break suddenly.
+subtitle: Code that's more than just a showcase for horrible hacks. For the most part.
 ---
 
 {% include portfolio_list.html elements=site.projects %}
