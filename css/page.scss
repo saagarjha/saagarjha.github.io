@@ -140,18 +140,18 @@ article * {
 	max-width: 100%;
 }
 
-#copyright {
-	p {
-		max-width: $article_width;
-		margin: $article_margin;
-		padding: $copyright_padding;
-		@include adaptive(color, $article_color);
-	}
+// #copyright {
+// 	p {
+// 		max-width: $article_width;
+// 		margin: $article_margin;
+// 		padding: $copyright_padding;
+// 		@include adaptive(color, $article_color);
+// 	}
 
-	@media print {
-		display: none;
-	}
-}
+// 	@media print {
+// 		display: none;
+// 	}
+// }
 
 p {
 	margin: $p_margin_size;
