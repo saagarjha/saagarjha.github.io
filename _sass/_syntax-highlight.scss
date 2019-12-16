@@ -12,12 +12,16 @@ pre.highlight {
 }
 
 .highlight, .highlight .w, code.highlighter-rouge, kbd, samp {
-	color: #586e75;
 	background-color: #fdf6e3;
-
-	@media(prefers-color-scheme:dark) {
-		color: #93a1a1;
+	@media(prefers-color-scheme: dark) {
 		background-color: #002b36;
+	}
+
+	:not(a) > & {
+		color: #586e75;
+		@media(prefers-color-scheme: dark) {
+			color: #93a1a1;
+		}
 	}
 }
 
