@@ -33,13 +33,13 @@ As one of the hottest, if not *the* hottest code paths on the system, it has goo
 
 ## A little bit of idle speculation
 
-The key insight is that we can guess where the vast majority of method calls will go, and we can do so *at compile time* just by looking at the type of the receiver and message we're sending to it. Most of the time, `objc_msgSend` is just confirming what we already know: the only practical difference between its fast path and a direct function call is that it needs to check, as quickly as possible, that its target is what it expects it to be before jumping there. There's no way around this if we want to support Objective-C's dynamism; any implementation we come up with will have to do this too. The advantage we have over `objc_msgSend` is that as humans (or as a compiler), we have static type information and an understanding of the surrounding code which lets us guess, statically and with high accuracy, what the target is. In fact, we can just *speculate* that the call will go to the predicted method, and, taking a leaf out of `objc_msgSend`'s book, wrap a direct call to it in the barest minimum of checking to make sure that we were correct in our prediction. In psuedocode, we can convert a call to `-[Foo bar]` to something like this:
+The key insight is that we can guess where the vast majority of method calls will go, and we can do so *at compile time* just by looking at the type of the receiver and message we're sending to it. Most of the time, `objc_msgSend` is just confirming what we already know: the only practical difference between its fast path and a direct function call is that it needs to check, as quickly as possible, that its target is what it expects it to be before jumping there. There's no way around this if we want to support Objective-C's dynamism; any implementation we come up with will have to do this too. The advantage we have over `objc_msgSend` is that as humans (or as a compiler), we have static type information and an understanding of the surrounding code which lets us guess, statically and with high accuracy, what the target is. In fact, we can just *speculate* that the call will go to the predicted method, and, taking a leaf out of `objc_msgSend`'s book, wrap a direct call to it in the barest minimum of checking to make sure that we were correct in our prediction. In psuedocode, we can convert a call to `-[Foo bar]` (where the reciever is `foo`) to something like this:
 
 ```
 if (target is -[Foo bar]) {
 	jump to -[Foo bar]
 } else {
-	objc_msgSend(Foo.class, @selector(bar))
+	objc_msgSend(foo, @selector(bar))
 }
 ```
 
