@@ -9,6 +9,7 @@
 	{% assign update=true %}
 {% else %}
 	{% assign type=include.type %}
+	{% assign update=false %}
 {% endif %}
 {::options parse_block_html="true" /}
 {% if update %}
