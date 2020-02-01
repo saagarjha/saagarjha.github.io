@@ -22,6 +22,28 @@ log: Invalid Modes 'private_data:on'
 
 While `log` no longer lets us set this secret configuration option, it's not gone entirely: we can still enable it ourselves, just not directly. If you're impatient, you can skip directly to [here](#putting-it-all-together); otherwise read on to see how this setting works internally.
 
+{% capture update_2_1_20_code %}
+```console
+$ codesign -d --entitlements :- `which log`
+Executable=/usr/bin/log
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.private.debug_port</key>
+	<true/>
+	<key>com.apple.private.logging.admin</key>
+	<true/>
+	<key>com.apple.private.set-atm-diagnostic-flag</key>
+	<true/>
+</dict>
+</plist>
+```
+{% endcapture %}
+{% assign update_2_1_20="Unfortunately it appears that somewhere around macOS 10.15.3 Apple added an extra check for `host_set_atm_diagnostic_flag`, restricting its functionality to binaries with the `com.apple.private.set-atm-diagnostic-flag` entitlement: ![Hopper disassembly of the kernel code invoked by host_set_atm_diagnostic_flag, showing a new entitlements check](HopperEntitlementCheck.png) `log` of course possesses this new entitlement, " | append: update_2_1_20_code | append: "but since we cannot, any of our attempts to set the diagnostic flag will fail with `KERN_NO_ACCESS` (supposedly a [Bogus access restriction](https://github.com/apple/darwin-xnu/blob/0a798f6738bc1db01281fc08ae024145e84df927/osfmk/mach/kern_return.h#L109)…). If you are comfortable with disabling System Integrity Protection, the steps mentioned [here](https://saagarjha.com/blog/2019/09/29/making-os-log-public-on-macos-catalina#enabling-private_data-by-hand) will still work, but otherwise I don't see any easy ways to get around this new requirement." %}
+
+{% include aside.html type="Update" date="2/1/20" content=update_2_1_20 %}
+
 ## You must be this tall to ride
 
 As with any reverse-engineering exercise, we pull out our trusty disassembler and point it at `/usr/bin/log`. We're looking for the code that handles configurations, so it makes sense to look for the error we got earlier; searching for "Invalid Modes" gives us a string that we can cross-reference to a function that clearly handles parsing options for the `config` subcommand:
