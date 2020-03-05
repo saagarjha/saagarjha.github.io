@@ -1,5 +1,7 @@
+{% assign elements = include.elements | reverse %}
+
 <section>
-	{% for e in include.elements %}
+	{% for e in elements %}
 		<h2 class="project">
 			<span>{{ e.title }}</span>
 			<span>
