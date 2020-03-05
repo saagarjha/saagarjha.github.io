@@ -1,5 +1,6 @@
 ---
 title: Vulcanize
+date: 2016-09-19
 description: >
   An iMessage application for sending formulas generated in LaTeX through iMessage. Also supports stickers!
 links:
