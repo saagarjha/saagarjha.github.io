@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Jailed Just-In-Time Compilation on iOS"
+title: "Jailed Just-in-Time Compilation on iOS"
 ---
 
 Just-in-time compilation on iOS normally requires applications to possess the dynamic-codesigning entitlement, a privilege that Apple uniquely awards to system processes that require the high-performance tiers of JavaScriptCore. "True" just-in-time compilers require the ability to generate executable pages with an invalid code signature, a practice that is usually prohibited on iOS for third-party apps because it sidesteps code validation guarantees that Apple would like to enforce. While these applications cannot use `mmap`'s `MAP_JIT` without this entitlement (the usual way to create a RWX region for JIT purposes), there is a method that does work on devices without a jailbreak, though its combination of being unfit for the App Store and really only being useful for speeding up virtual machines makes it seemingly unknown outside of the emulation community. The technique relies on a somewhat arcane side effect of how debugging works on iOS to enable a slightly more limited JIT.
