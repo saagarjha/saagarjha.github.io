@@ -28,7 +28,7 @@ relative_stylesheets:
 		{% endif %}
 		<h3 class="post">
 			<time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%-d" }}</time>
-			<a href="{{ post.url }}">{{ post.title }}</a>
+			<a href="{{ post.url }}">{{ post.title | markdownify | replace: "<p>", "" | replace: "</p>", "" }}</a>
 		</h3>
 	{% endfor %}
 	</section>
