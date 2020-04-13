@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Making os_log Public on macOS Catalina"
+title: "Making `os_log` Public on macOS Catalina"
+clean_title: "Making os_log Public on macOS Catalina"
 ---
 
 Apple's [unified logging system](https://developer.apple.com/documentation/os/logging) launched in macOS Sierra and iOS 10 as the successor to [Apple System Logger](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/asl.3.html)–itself a replacement for the [syslog(3)](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/syslog.3.html) API–and alongside it came changes in how logs were organized and persisted, plus a new `log` command and redesigned Console app to make sense of these messages. One important change, however, [related to privacy](https://developer.apple.com/documentation/os/logging#1841411): by default, dynamic data not specifically annotated with the `%{public}` keyword will not be logged–the format specifier will be replaced with "&lt;private&gt;" instead of the identified object. While this helps prevent against accidentally leaking personal information, it can be inconvenient when debugging issues. To bypass this restriction, the `log` command used to allow for changing the logging configuration to display all data:

@@ -1,12 +1,15 @@
 ---
 layout: post
-title: "Bypassing objc_msgSend"
+title: "Bypassing `objc_msgSend`"
+clean_title: "Bypassing objc_msgSend"
 ---
 
 On its fastest path, [`objc_msgSend`](https://developer.apple.com/documentation/objectivec/1456712-objc_msgsend) can transfer execution to an [`IMP`](https://developer.apple.com/documentation/objectivec/objective-c_runtime/imp) in just over a dozen instructions:
 
 ```console
-$ otool -tV /usr/lib/libobjc.dylib | grep -A 15 objc_msgSend:
+$ otool -tV /usr/lib/libobjc.dylib -p _objc_msgSend | head -n 18
+/usr/lib/libobjc.dylib:
+(__TEXT,__text) section
 _objc_msgSend:
 0000000000006e00	testq	%rdi, %rdi
 0000000000006e03	je	0x6e78
