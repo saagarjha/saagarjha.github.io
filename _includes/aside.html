@@ -23,9 +23,19 @@
 {% else %}
 <aside>
 {% endif %}
+{% if include.collapsible != nil %}
+<details>
+<summary>
+{% endif %}
 {{ type }}
 {: .aside-type }
+{% if include.collapsible != nil %}
+</summary>
+{% endif %}
 
 {{ include.content }}
 {: .aside-content }
+{% if include.collapsible != nil %}
+</details>
+{% endif %}
 </aside>

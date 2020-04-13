@@ -239,6 +239,10 @@ aside {
 		margin: $aside_type_margin;	
 	}
 
+	summary .aside-type {
+		display: inline-block;
+	}
+
 	&.aside-update {
 		@include adaptive(border-left, $aside_update_left_border);
 	}
