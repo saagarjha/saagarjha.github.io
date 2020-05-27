@@ -70,7 +70,7 @@ With all the checks in place, we can now call the method directly. To try this o
 
 There's no better way to see how fast (or slow) an optimization is than a highly synthetic benchmark. This one creates a simple Objective-C array type for integers, fills it with random numbers, and sums them. Since I'm a horrible person, you get to scroll past it:
 
-```objc
+```objc++
 @import Foundation;
 @import ObjectiveC;
 #import <algorithm>
