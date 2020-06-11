@@ -97,6 +97,8 @@ As this technique allowed an application that appears to be sandboxed (possessin
 
 While the [dyld source for `configureProcessRestrictions`](https://github.com/apple-open-source-mirror/dyld/blob/f033f5564c85c5cbfd24cf25e702e4bb0c2c39b4/src/dyld2.cpp#L5060) only shows five flags being read from `amfi_check_dyld_policy_self`, the binary clearly checks a sixth: `1 << 6`. (`configureProcessRestrictions` has been inlined here into its caller, `dyld::_main`.) I still do not know what its real name is but it's used later in `dyld::_main` to control whether interposing is allowed. This means we can't interpose `_libsecinit_initializer`–we'll have to prevent it from from being called instead.
 
+{% include aside.html type="Update" date="6/10/19" content="With the code to dyld [released](https://opensource.apple.com/source/dyld/dyld-733.8/src/dyld2.cpp.auto.html), we can see that the flag is called `AMFI_DYLD_OUTPUT_ALLOW_LIBRARY_INTERPOSING`. Interestingly, there are some applications that are exempted from the check in AMFI's `macos_dyld_policy_library_interposing`, meaning that they are still susceptible to this issue: ![Hopper disassembly listing showing the bundle identifiers of exemptions](HopperAMFIExceptions.png)" %}
+
 ### Static linking
 
 Linking against libSystem causes dyld to call `_libsecinit_initializer`, so it's logical to try to avoid having anything to do with dyld at all. This is fairly strange to do on macOS, as it does not have a stable syscall interface, but with the right set of compiler flags we can make a fully static binary that needs to no additional support to run.
