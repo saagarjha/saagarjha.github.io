@@ -27,8 +27,10 @@
 <details>
 <summary>
 {% endif %}
+{% if include.type != "" %}
 {{ type }}
 {: .aside-type }
+{% endif %}
 {% if include.collapsible != nil %}
 </summary>
 {% endif %}
