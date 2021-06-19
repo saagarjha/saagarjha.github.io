@@ -64,7 +64,7 @@ The standard `strcpy` function, which copies characters from `src` to `dst`, up 
 
 {% include aside.html collapsible=true type="Summary" content=strcpy_summary%}
 
-`strcpy` certainly fulfills requirement 2 and parts of 4: it will always write out a null-terminated string and it'll do so quickly. However, it cannot perform bounds checks at all, so we can only use it if we know our destination buffer is smaller than our source buffer–it fails requirement 1. Plus it doesn't tell us how many characters it wrote, either–that's requirement 3. It's been part of C forever, so it does meet requirement 5.
+`strcpy` certainly fulfills requirement 2 and parts of 4: it will always write out a null-terminated string and it'll do so quickly. However, it cannot perform bounds checks at all, so we can only use it if we know our source buffer is smaller than our destination buffer–it fails requirement 1. Plus it doesn't tell us how many characters it wrote, either–that's requirement 3. It's been part of C forever, so it does meet requirement 5.
 
 ### `strncpy`
 
