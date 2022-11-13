@@ -1,0 +1,29 @@
+{
+	"aliases":
+	[
+		"https://federated.saagarjha.com/users/saagar"
+	],
+	"links":
+	[
+		{
+			"href": "https://federated.saagarjha.com/users/saagar",
+			"rel": "http://webfinger.net/rel/profile-page",
+			"type": "text/html"
+		},
+		{
+			"href": "https://federated.saagarjha.com/users/saagar",
+			"rel": "self",
+			"type": "application/activity+json"
+		},
+		{
+			"href": "https://federated.saagarjha.com/users/saagar",
+			"rel": "self",
+			"type": "application/ld+json; profile=\"https://www.w3.org/ns/activitystreams\""
+		},
+		{
+			"rel": "http://ostatus.org/schema/1.0/subscribe",
+			"template": "https://federated.saagarjha.com/ostatus_subscribe?acct={uri}"
+		}
+	],
+	"subject": "acct:saagar@saagarjha.com"
+}

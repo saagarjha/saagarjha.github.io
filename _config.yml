@@ -28,3 +28,4 @@ whitelist:
 exclude:
   - Gemfile
   - Gemfile.lock
+include: [".well-known"]
