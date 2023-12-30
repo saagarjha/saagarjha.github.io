@@ -298,13 +298,16 @@ void *memccpy(void *restrict dst, const void *restrict src, int chr, size_t len)
 ```c
 char *strxcpy(char *restrict dst, const char *restrict src, size_t len) {
 	char *end = memccpy(dst, src, '\0', len);
-	if (!end) {
+	if (!end && len) {
 		dst[len - 1] = '\0';
 	}
 	return end;
 }
 ```
+
 While it'll ship in an upcoming C standard, it's already widely available as a popular, optional POSIX extension.
+
+{% include aside.html type="Fun fact" content="The original implementation listed here contained a bug when handling `len == 0`. Fittingly, the out-of-bounds write went unnoticed for over two years, which goes to show that string handling in C remains difficult ;) Thanks to [Bilgus](https://forums.rockbox.org/index.php?action=profile;u=63414) for finding this!" %}
 
 ### Other functions
 
