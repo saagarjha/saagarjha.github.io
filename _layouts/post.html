@@ -14,5 +14,8 @@ post_stylesheets:
 </section>
 <footer>
 	<hr>
+	{% if page.attribution %}
+	<p class="attribution">{{ page.attribution }}</p>
+	{% endif %}
 	<p class="feedback">Questions? Comments? Corrections? Feel free to reach out to me at <a href="mailto:{{ site.email }}">{{ site.email }}</a>; I'd love to hear your thoughts!</p>
 </footer>
