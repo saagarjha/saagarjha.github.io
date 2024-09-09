@@ -6,14 +6,14 @@
 	<head>
 		{% include head.html %}
 		
-		<link rel="stylesheet" href="/css/default.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/default.css">
 
 		{% for rss in page.relative_stylesheets %}
 		<link rel="stylesheet" href="{{ rss }}.css">
 		{% endfor %}
 
 		{% for ss in page.stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
 
 		{% for rss in layout.relative_stylesheets %}
@@ -21,7 +21,7 @@
 		{% endfor %}
 
 		{% for ss in layout.stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
 
 		{% for rss in page.post_relative_stylesheets %}
@@ -29,7 +29,7 @@
 		{% endfor %}
 
 		{% for ss in page.post_stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
 
 		{% for rss in layout.post_relative_stylesheets %}
@@ -37,7 +37,7 @@
 		{% endfor %}
 
 		{% for ss in layout.post_stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
 
 		{% for rss in page.portfolio_relative_stylesheets %}
@@ -45,7 +45,7 @@
 		{% endfor %}
 
 		{% for ss in page.portfolio_stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
 
 		{% for rss in layout.portfolio_relative_stylesheets %}
@@ -53,7 +53,7 @@
 		{% endfor %}
 
 		{% for ss in layout.portfolio_stylesheets %}
-		<link rel="stylesheet" href="/css/{{ ss }}.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
 	</head>
 	<body>

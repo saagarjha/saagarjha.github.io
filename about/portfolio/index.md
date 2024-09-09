@@ -14,7 +14,7 @@ My name is Saagar Jha, and I am currently a senior at Monta Vista High School in
 	<ol>
 		<li>Much of this code is freely available, either on my <a href="https://github.com/saagarjha">GitHub</a> or <a href="https://bitbucket.org/saagarjha/">Bitbucket</a> accounts. While the code posted here is the same as what's online, on occasion I have added comments to make it more clear what is going on. Comments marked as <code>// [SNIPPED]</code> indicate that some code has been omitted from the file to keep it at a reasonable size.
 		</li>
-		<li>I created this portfolio using Markdown on my website–you can find it <a href="{{ site.url }}/about/portfolio/">here</a>. I chose writing this in Markdown/HTML because has the advantage of:
+		<li>I created this portfolio using Markdown on my website–you can find it <a href="{{ site.baseurl }}/about/portfolio/">here</a>. I chose writing this in Markdown/HTML because has the advantage of:
 			<ul>
 				<li>providing niceties such as code coloring and animated GIF support.</li>
 				<li>being up-to-date. <del>I crashed my bike recently, breaking my computer (and my clavicle, which, unlike my computer, is fixable). Unfortunately, this forces me to write this on a borrowed laptop, without access to some of my code. I'll update this as soon as I can get a new computer with what I missed.</del> I have a new computer now! I'm updating it as I recover my old files.</li>

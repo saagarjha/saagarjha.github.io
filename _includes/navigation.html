@@ -22,7 +22,7 @@
 			{% else %}
 				{% assign clean_link = link %}
 			{% endif %}
-			<li><a href="{{ site.url }}/{{ clean_link }}"{% if class %}{{ class | prepend: " " }}{% endif %}{% if id %}{{ id | prepend: " " }}{% endif %}>{{ text }}</a></li>
+			<li><a href="{{ site.baseurl }}/{{ clean_link }}"{% if class %}{{ class | prepend: " " }}{% endif %}{% if id %}{{ id | prepend: " " }}{% endif %}>{{ text }}</a></li>
 			{% assign class = nil %}
 			{% assign id = nil %}
 		{% endfor %}
