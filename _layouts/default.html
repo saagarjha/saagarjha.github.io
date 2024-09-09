@@ -5,7 +5,8 @@
 <html lang="en-US">
 	<head>
 		{% include head.html %}
-		
+
+		{%- capture _stylesheets -%}
 		<link rel="stylesheet" href="{{ site.baseurl }}/css/default.css">
 
 		{% for rss in page.relative_stylesheets %}
@@ -55,10 +56,20 @@
 		{% for ss in layout.portfolio_stylesheets %}
 		<link rel="stylesheet" href="{{ site.baseurl }}/css/{{ ss }}.css">
 		{% endfor %}
+		{%- endcapture -%}
+		{%- assign stylesheets = _stylesheets | newline_to_br | split: '<br />' -%}
+		{% for stylesheet in stylesheets %}
+			{%- assign _stylesheet = stylesheet | strip -%}
+			{%- if _stylesheet != "" -%}
+				{{ _stylesheet }}
+			{%- endif -%}
+		{% endfor %}
 	</head>
 	<body>
 		{% include navigation.html %}
-		<main>{{ content }}</main>
+		<main>
+			{{ content }}
+		</main>
 		{% include footer.html %}
 	</body>
 </html>

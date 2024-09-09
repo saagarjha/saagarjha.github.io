@@ -6,7 +6,8 @@ post_stylesheets:
 ---
 
 <header>
-	<h1>{{ page.title | markdownify | replace_first: "<p>", "" | replace_last: "</p>", "" }}</h1>
+	{% comment %}A poor man's remove_last.{% endcomment %}
+	<h1>{{- page.title | markdownify | remove_first: "<p>" | split: "" | reverse | join: "" | remove_first: ">p/<" | split: "" | reverse | join: "" | strip -}}</h1>
 	<p><time>{{ page.date | date: "%A, %B %-d, %Y" }}</time></p>
 </header>
 <section>

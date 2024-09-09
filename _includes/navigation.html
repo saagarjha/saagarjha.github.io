@@ -6,25 +6,25 @@
 {% endif %}
 <nav>
 	<ul>
-		{% assign links = "main,blog,projects,toys" | split: "," %}
+		{%- assign links = "main,blog,projects,toys" | split: "," -%}
 		{% for link in links %}
-			{% if link == current %}
-				{% capture class %}class="current-nav-item"{% endcapture %}
-			{% endif %}
-			{% if link == "main" %}
-				{% capture id %}id="main-nav-item"{% endcapture %}
-				{% assign text = "Saagar Jha" %}
-			{% else %}
-				{% assign text = link | capitalize %}
-			{% endif %}
+			{%- if link == current -%}
+				{%- capture class -%}class="current-nav-item"{%- endcapture -%}
+			{%- endif -%}
+			{%- if link == "main" -%}
+				{%- capture id -%}id="main-nav-item"{%- endcapture -%}
+				{%- assign text = "Saagar Jha" -%}
+			{%- else -%}
+				{%- assign text = link | capitalize -%}
+			{%- endif -%}
 			{% if link == "main" %}
 				{% assign clean_link = "" %}
 			{% else %}
-				{% assign clean_link = link %}
+				{% assign clean_link = link | append: "/" %}
 			{% endif %}
 			<li><a href="{{ site.baseurl }}/{{ clean_link }}"{% if class %}{{ class | prepend: " " }}{% endif %}{% if id %}{{ id | prepend: " " }}{% endif %}>{{ text }}</a></li>
-			{% assign class = nil %}
-			{% assign id = nil %}
+			{%- assign class = nil -%}
+			{%- assign id = nil -%}
 		{% endfor %}
 	</ul>
 </nav>
