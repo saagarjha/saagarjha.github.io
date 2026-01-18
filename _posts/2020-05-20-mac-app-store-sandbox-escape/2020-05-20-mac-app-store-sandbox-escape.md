@@ -202,7 +202,7 @@ The code I submitted to Apple to demonstrate the issue is [available online](htt
 * **2/28:20:** Response from Apple that they were still looking into the issue
 * **3/19:20:** Email from Apple stating that Mac App Store applications cannot be interposed
 * **3/20/20:** Submission of statically linked application to avoid interposing
-* **3/23/23:** Acknowledgement of the new information
+* **3/23/20:** Acknowledgement of the new information
 * **4/14/20:** Submission of dynamically linked application to bypass `execve` limitation
 * **4/17/20:** Request for more time from Apple to analyze the new submission
 * **4/19/20:** Disclosure deadline extended by 30 days to May 20th
