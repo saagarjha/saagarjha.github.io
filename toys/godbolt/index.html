@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Compiler Explorer</title>
+	<meta name="color-scheme" content="light dark">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Compiler Explorer">
+	<style>
+		body {
+			font-family: system-ui, sans-serif;
+			display: flex;
+			flex-direction: column;
+			height: 100dvh;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		header {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			margin: 0.25rem;
+		}
+
+		main {
+			flex: 1;
+			display: flex;
+			overflow: hidden;
+		}
+
+		select {
+			max-width: 10rem;
+		}
+
+		#language {
+			max-width: 10rem;
+		}
+
+		#flags {
+			max-width: 5rem;
+		}
+
+		#code {
+			border: none;
+			flex: 1;
+			font-size: 0.75rem;
+			font-family: ui-monospace, monospace;
+			margin: 0.25rem;
+			resize: horizontal;
+		}
+
+		#assembly-container {
+			flex: 1;
+			font-size: 0.75rem;
+			font-family: ui-monospace, monospace;
+			margin: 0.25rem;
+			overflow: auto;
+		}
+
+		#assembly {
+			display: inline-block;
+			min-width: 100%;
+		}
+
+		#header-divider-container {
+			display: flex;
+			position: relative;
+		}
+
+		#header-divider {
+			flex: 1;
+			margin: 0;
+		}
+
+		#loader {
+			height: 100%;
+			position: absolute;
+			width: 100%;
+		}
+
+		#main-divider {
+			align-self: stretch;
+			margin: 0;
+			height: auto;
+		}
+
+		.highlighted {
+			background-color: Highlight;
+			color: HighlightText;
+		}
+
+		.error {
+			color: red;
+		}
+
+		fieldset>p {
+			margin: 0.25rem;
+		}
+
+		fieldset>p>label {
+			display: block;
+		}
+	</style>
+	<script type="module">
+		"use strict";
+
+		class API {
+			constructor(base) {
+				this.base = base;
+			}
+
+			async get(endpoint) {
+				return await (await fetch(`${this.base}${endpoint}`, {
+					headers: {
+						"Accept": "application/json",
+					},
+				})).json();
+			}
+
+			async post(endpoint, data) {
+				return await (await fetch(`${this.base}${endpoint}`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+					},
+					body: JSON.stringify(data),
+				})).json();
+			}
+
+			#languages;
+			#compilers;
+			#formats;
+
+			async languages() {
+				if (!this.#languages) {
+					this.#languages = (async () => {
+						await this.#populateLanguageCompilers();
+						return await this.#languages;
+					})();
+				}
+				return this.#languages;
+			}
+
+			async compilers() {
+				if (!this.#compilers) {
+					this.#compilers = (async () => {
+						await this.#populateLanguageCompilers();
+						return await this.#compilers;
+					})();
+				}
+				return this.#compilers;
+			}
+
+			async formats() {
+				if (!this.#formats) {
+					this.#formats = (async () => {
+						const formats = {};
+						for (const format of await this.get("/api/formats")) {
+							formats[format.type] = format;
+						}
+						return formats;
+					})();
+				}
+				return this.#formats;
+			}
+
+			#populated;
+
+			async #populateLanguageCompilers() {
+				if (!this.#populated) {
+					this.#populated = (async () => {
+						const languages = {};
+						for (const language of await this.get("/api/languages?fields=id,name,defaultCompiler,example,formatter")) {
+							languages[language.id] = language;
+						}
+
+						let compilers = {};
+						for (const compiler of await this.get("/api/compilers?fields=id,name,lang,compilerType,compilerCategories,instructionSet,options,supportsExecute,supportsDeviceAsmView")) {
+							compilers[compiler.id] = compiler;
+						}
+
+						for (const compiler of Object.values(compilers)) {
+							const compilers = languages[compiler.lang].compilers ??= {};
+							const type = `${compiler.compilerType} ${compiler.compilerCategories} (${compiler.instructionSet})`;
+							compilers[type] ??= [];
+							compilers[type].push(compiler);
+						}
+
+						this.#languages = Promise.resolve(languages);
+						this.#compilers = Promise.resolve(compilers);
+					})();
+				}
+				return this.#populated;
+			}
+		}
+
+		class OptionsUI {
+			constructor(ui) {
+				this.ui = ui;
+				this.view = document.getElementById("options-view");
+				this.arguments = document.getElementById("option-arguments");
+				this.input = document.getElementById("option-input");
+				this.style = document.getElementById("option-style");
+				this.execution = document.getElementById("options-execution");
+				this.formatting = document.getElementById("options-formatting");
+
+				this.view.addEventListener("change", async (event) => {
+					this.currentView = event.target.value;
+					ui.compile(true)
+				});
+				this.currentView = "Assembly";
+			}
+
+			async resetView() {
+				this.currentView = "Assembly";
+				await this.update();
+			}
+
+			async updateDevices(devices) {
+				this.devices = devices;
+				await this.update();
+			}
+
+			async update() {
+				const language = (await this.ui.api.languages())[this.ui.language.value];
+				const compiler = (await this.ui.api.compilers())[this.ui.compiler.value];
+
+				const view = this.currentView;
+
+				const legend = document.createElement('legend');
+				legend.textContent = "View";
+				this.view.replaceChildren(legend);
+
+				const createButton = (name) => {
+					const div = document.createElement("div");
+
+					const input = document.createElement("input");
+					input.type = "radio";
+					input.name = "option-view";
+					input.value = name;
+					input.id = `option-view-${name}`;
+
+					if (input.value == view) {
+						input.checked = true;
+					}
+
+					const label = document.createElement("label");
+					label.htmlFor = input.id;
+					label.textContent = name;
+
+					div.replaceChildren(input, label);
+					return div;
+				};
+
+				this.view.appendChild(createButton("Assembly"));
+				if (this.devices) {
+					for (const device of this.devices) {
+						this.view.appendChild(createButton(device));
+					}
+				}
+				if (compiler.supportsExecute) {
+					this.view.appendChild(createButton("Execute"));
+				}
+				this.execution.hidden = !compiler.supportsExecute;
+
+				if (language.formatter) {
+					const styles = (await this.ui.api.formats())[language.formatter].styles;
+					this.formatting.hidden = !styles.length;
+					this.style.replaceChildren(...styles.map((style) => new Option(style)));
+				} else {
+					this.formatting.hidden = true;
+				}
+
+				this.ui.options.disabled = this.execution.hidden && this.formatting.hidden;
+			}
+		}
+
+		class UI {
+			constructor(api) {
+				this.api = api;
+				this.language = document.getElementById("language");
+				this.compiler = document.getElementById("compiler");
+				this.flags = document.getElementById("flags");
+				this.loader = document.getElementById("loader");
+				this.code = document.getElementById("code");
+				this.assembly = document.getElementById("assembly");
+				this.options = document.getElementById("options");
+				this.format = document.getElementById("format");
+				this.share = document.getElementById("share");
+				this.optionsContainer = document.getElementById("options-container");
+				this.optionsUI = new OptionsUI(this);
+			}
+
+			async _init() {
+				this.language.replaceChildren(...Object.values(await this.api.languages()).map((language) => new Option(language.name, language.id)));
+
+				this.language.addEventListener("change", this.languageChanged);
+				this.compiler.addEventListener("change", this.compilerChanged);
+				this.flags.addEventListener("input", async () => await this.compile());
+				this.code.addEventListener("input", async () => await this.compile());
+				this.options.addEventListener("click", () => this.optionsContainer.showModal());
+
+				this.format.addEventListener("click", async () => {
+					const language = (await this.api.languages())[this.language.value];
+					const formatter = (await this.api.formats())[language.formatter];
+
+					const result = await this.api.post(`/api/format/${formatter.type}`, {
+						"source": this.code.value,
+						"base": this.optionsUI.style.value,
+					});
+					if (!result.exit) {
+						this.code.value = result.answer;
+					}
+				});
+
+				this.share.addEventListener("click", async () => {
+					const tab = window.open('about:blank', '_blank');
+
+					tab.location.href = (await this.api.post('/api/shortener', {
+						"sessions": [
+							{
+								"id": 1,
+								"language": this.language.value,
+								"source": this.code.value,
+								"compilers": [
+									{
+										"id": this.compiler.value,
+										"options": this.flags.value
+									},
+								]
+							}
+						]
+					})).url;
+				});
+
+				await this.changeLanguage("c++");
+			}
+
+			async changeLanguage(language) {
+				this.language.value = language;
+				await this.languageChanged();
+			}
+
+			languageChanged = async () => {
+				const language = (await this.api.languages())[this.language.value];
+
+				this.compiler.replaceChildren(...Object.entries(language.compilers).map(([type, compilers]) => {
+					const optgroup = document.createElement("optgroup");
+					optgroup.label = type;
+
+					for (const compiler of compilers) {
+						const option = new Option(compiler.name, compiler.id);
+						optgroup.appendChild(option);
+					}
+					return optgroup;
+				}));
+				this.changeCompiler(language.defaultCompiler);
+
+				this.code.value = language.example;
+				this.format.disabled = !language.formatter;
+
+				this.compile(true);
+				this.optionsUI.update();
+			}
+
+			async changeCompiler(compiler) {
+				this.compiler.value = compiler;
+				await this.optionsUI.resetView();
+				await this.compilerChanged();
+			}
+
+			compilerChanged = async () => {
+				this.flags.textContent = (await this.api.compilers())[this.compiler.value].options;
+				this.compile(true);
+			}
+
+			highlight(assembly, line) {
+				for (const element of document.querySelectorAll('[data-line]')) {
+					element.classList.remove("highlighted");
+				}
+
+				if (!line) {
+					return;
+				}
+
+				const code = this.code.value;
+				const lines = code.split("\n");
+				let start = 0;
+				for (let i = 0; i < line; i++) {
+					start += lines[i].length + 1;
+				}
+				const end = start + lines[line].length;
+
+				// For selection to work on mobile, we typically need to focus the
+				// element. However, this will make the keyboard show up and block
+				// the view, which is undesirable. Instead, disable the keyboard,
+				// then re-enable it the moment the user shows any interest in
+				// editing again.
+				this.code.setAttribute("inputmode", "none");
+				this.code.focus();
+				this.code.setSelectionRange(start, end);
+				this.code.addEventListener("pointerdown", () => {
+					this.code.setAttribute("inputmode", "text");
+				}, { once: true });
+				this.code.scrollTop = line * this.code.scrollHeight / lines.length;
+
+				for (const element of document.querySelectorAll(`[data-line="${line}"]`)) {
+					element.classList.add("highlighted");
+				}
+			}
+
+			addLines(result, lines, lineClass = null) {
+				for (const line of lines) {
+					const div = document.createElement("div");
+					div.textContent = line.text;
+					if (lineClass) {
+						div.classList.add(lineClass);
+					}
+
+					const sourceLine = line.source && !line.source.file ? line.source.line - 1 : null;
+					div.dataset.line = sourceLine;
+					div.addEventListener("click", () => {
+						this.highlight(result, sourceLine);
+					});
+
+					this.assembly.appendChild(div);
+				}
+			}
+
+			async _compile() {
+				this.loader.hidden = false;
+
+				let compiler = (await this.api.compilers())[this.compiler.value];
+
+				const execute = this.optionsUI.currentView == "Execute";
+
+				const result = await this.api.post(`/api/compiler/${compiler.id}/compile`, {
+					"source": this.code.value,
+					"options": {
+						"userArguments": this.flags.value,
+						"compilerOptions": {
+							"executorRequest": execute,
+							"produceDevice": compiler.supportsDeviceAsmView,
+						},
+						"filters": {
+							"execute": execute,
+						},
+					},
+				});
+
+				this.assembly.replaceChildren();
+
+				if (result.code) {
+					this.addLines(result, result.stderr, "error");
+					this.addLines(result, [{ "text": `Build failed with code ${result.code}` }]);
+				} else {
+					if (execute) {
+						this.addLines(result, [{ "text": "Standard output:" }, ...result.stdout, { "text": "\n" }]);
+						this.addLines(result, [{ "text": "Standard error:" }, ...result.stderr, { "text": "\n" }], "error");
+						this.addLines(result, [{ "text": `Program exited with code ${result.code}` }]);
+					} else if (this.optionsUI.currentView != "Assembly") {
+						if (!(this.optionsUI.currentView in result.devices)) {
+							this.optionsUI.resetView();
+						}
+						this.addLines(result, result.devices[this.optionsUI.currentView].asm);
+					} else {
+						this.addLines(result, result.asm);
+					}
+				}
+
+				if (compiler.supportsDeviceAsmView) {
+					if (result.devices) {
+						this.optionsUI.updateDevices(Object.keys(result.devices));
+					}
+				} else {
+					this.optionsUI.updateDevices(null);
+				}
+
+				this.loader.hidden = true;
+			}
+
+			#pendingCompile;
+
+			compile(immediately = false) {
+				clearTimeout(this.#pendingCompile);
+				this.#pendingCompile = setTimeout(() => {
+					this._compile();
+					this.#pendingCompile = null;
+				}, !immediately ? 1_000 : 0);
+			}
+		};
+
+		const api = new API("https://godbolt.org");
+		const ui = new UI(api);
+		ui._init();
+	</script>
+</head>
+
+<body>
+	<header>
+		<select id="language"></select>
+		<select id="compiler"></select>
+		<div>
+			<input type="text" id="flags" placeholder="Flags" />
+			<button id="options">Options</button>
+			<button id="format">Format</button>
+			<button id="share">Share</button>
+		</div>
+	</header>
+	<div id="header-divider-container">
+		<hr id="header-divider">
+		<progress id="loader" hidden></progress>
+	</div>
+	<main>
+		<textarea id="code" wrap="off" autocomplete="off" autocorrect="off" autocapitalize="off"
+			spellcheck="false"></textarea>
+		<hr id="main-divider">
+		<pre id="assembly-container"><div id="assembly"></div></pre>
+	</main>
+	<dialog id="options-container" closedby="any" autofocus>
+		<form method="dialog">
+			<fieldset id="options-view">
+			</fieldset>
+			<fieldset id="options-execution">
+				<legend>Execution</legend>
+				<p>
+					<label for="option-arguments">Arguments:</label>
+					<input type="text" id="option-arguments" />
+				</p>
+				<p>
+					<label for="option-input">Input:</label>
+					<textarea id="option-input" wrap="off"></textarea>
+				</p>
+			</fieldset>
+			<fieldset id="options-formatting">
+				<legend>Formatting</legend>
+				<p>
+					<label for="option-style">Style:</label>
+					<select id="option-style"></select>
+				</p>
+			</fieldset>
+			<button type="submit">Done</button>
+		</form>
+	</dialog>
+</body>
+
+</html>
