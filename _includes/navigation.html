@@ -6,7 +6,7 @@
 {% endif %}
 <nav>
 	<ul>
-		{%- assign links = "main,blog,projects,toys" | split: "," -%}
+		{%- assign links = "main,blog,talks,projects,toys" | split: "," -%}
 		{% for link in links %}
 			{%- if link == current -%}
 				{%- capture class -%}class="current-nav-item"{%- endcapture -%}
