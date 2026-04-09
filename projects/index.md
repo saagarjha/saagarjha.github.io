@@ -1,7 +1,7 @@
 ---
 layout: portfolio
 title: Projects
-subtitle: Lighter on the horrible hacks, for the most part.
+subtitle: Code that might actually have utility to someone.
 ---
 
 {% include portfolio_list.html elements=site.projects %}
